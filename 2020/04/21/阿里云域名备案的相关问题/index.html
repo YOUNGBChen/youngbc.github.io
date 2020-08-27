@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="BC">
+
+
+
+
+
+<title>阿里云域名备案的相关问题 | BC&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">BC&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">BC&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">阿里云域名备案的相关问题</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">BC</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 21, 2020&nbsp;&nbsp;18:02:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E9%97%B2%E8%B0%88/">闲谈</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h4 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h4><p>域名备案的目的就是为了防止在网上从事非法的网站经营活动，打击不良互联网信息的传播，如果网站不备案的话，很有可能被查处以后关停。根据中华人民共和国信息产业部第十二次部务会议审议通过的《非经营性互联网信息服务备案管理办法》条例，在中华人民共和国境内提供非经营性互联网信息服务，应当办理备案。未经备案，不得在中华人民共和国境内从事非经营性互联网信息服务。而对于没有备案的网站将予以罚款或关闭。</p>
+<h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>之前一直用的是国外CloudeFlare的免费CDN(大概用了大半年吧),使用这个CDN是不需要对域名进行备案的,但可能是因为免费的问题,真的很慢.国人撸羊毛实力太猛，各种技能应用在CloudFlare，各种梯子使用 CloudFlare 做 CDN，然后只见一片红海。所以我只能挥泪告别 CloudFlare，愿再见时无有隔阂！<br>国内的很多比如又拍云,七牛云虽然说收费,但按照他的活动弄下来其实和免费差不多,所以我准备开始用又拍云的CDN来实现我的博客全站的加速,但要使用国内免费CDN加速自己的网站要求网站域名已备案….</p>
+<h4 id="中间遇到的一些问题"><a href="#中间遇到的一些问题" class="headerlink" title="中间遇到的一些问题"></a>中间遇到的一些问题</h4><ul>
+<li>网站名称: 网站名称请使用3个以上汉字命名，请不要使用XXX个人空间、资讯、网站、网络、网址、技术、信息、爱好者、家园、作品展示、工作室、平台、主页、热线、社团、导航、搜索；这样的格式命名网站；网站名称中不要带有博客、论坛、在线、社区、交流等字样.<br>其实随便起一个就可以了,因为后续可以再次修改.最早健康快乐每一天这个名字广为流传,但按照客服人员的说法，这个健康快乐每一天已经被加入黑名单了……</li>
+<li>拍照上传: 眼睛视线正对镜头,为这个东西客服给我打了好几次电话…..</li>
+<li>电话: 建议备案期间电话保持畅通,因为你会收到客服的多次电话咨询,而且会进行短信验证,所以电话一定要保持畅通.</li>
+<li>其他:我的域名是在阿里云购入的,期间还有有人要和你用钉钉进行一个视频的对话,记得身份证原件放在身上,要确认你的个人身份.</li>
+</ul>
+<h4 id="等待时间"><a href="#等待时间" class="headerlink" title="等待时间"></a>等待时间</h4><p>这个基本上初审基本需要一天时间,上诉问题也基本会出现在这个时间段,等提交管局审核后大概需要两三周的时间,可以随时登录阿里云ICP代备案管理系统查看备案进度.</p>
+<p>注意: 如果是初次备案,在这期间域名是无法被访问的,不是初次的话应该可以.</p>
+<h4 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h4><p>ICP备案成功后，您需要在网站底部添加备案号并链接至工信部网站。部分省份还要求在网站底部添加版权所有。若网站涉及经营性业务，您需在ICP备案后申请经营性ICP许可证。待各网站在工信部备案成功后，需在网站开通之日起30日内提交公安联网备案申请。具体操作请参见ICP备案后处理。</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>1.凡是主机放在中国大陆的都需要做ICP备案。(阿里云wordpress应用镜像)</p>
+<p>2.不备案可以开通的网站都是把主机放在境外，一般中文的放在香港，英文的放在美国。(比hexo+github搭建博客)</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>BC</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youngbc.cn/2020/04/21/%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E5%A4%87%E6%A1%88%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">https://youngbc.cn/2020/04/21/%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E5%A4%87%E6%A1%88%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%97%B2%E8%B0%88/"># 闲谈</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/04/21/BUUCTF%20Crypto%E9%83%A8%E5%88%86wp/">BUUCTF Crypto部分wp</a>
+            
+            
+            <a class="next" rel="next" href="/2020/04/19/python%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%A4%9A%E8%BF%9B%E7%A8%8B/">python 多线程与多进程</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© BC </span>
+    </div>
+	<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+	<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">陕ICP备20005804号</a> 
+    <div>
+	<img src="/image/youpaiyun.png" width="5%" /></a>
+	<a href="http://www.beian.miit.gov.cn/" target="_blank" ></a>
+    </div>
+
+
+
+    </div>
+</body>
+</html>

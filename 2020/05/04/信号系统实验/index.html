@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="BC">
+
+
+
+
+
+<title>信号系统实验 | BC&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">BC&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">BC&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">信号系统实验</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">BC</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 4, 2020&nbsp;&nbsp;10:02:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Matlab/">Matlab</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="第一次"><a href="#第一次" class="headerlink" title="第一次"></a>第一次</h1><p><a target="_blank" rel="noopener" href="https://github.com/YOUNGBChen/MatlabCoursesCode/tree/master/Frist">https://github.com/YOUNGBChen/MatlabCoursesCode/tree/master/Frist</a></p>
+<h1 id="第二次"><a href="#第二次" class="headerlink" title="第二次"></a>第二次</h1><h3 id="1-谐波的叠加"><a href="#1-谐波的叠加" class="headerlink" title="1.谐波的叠加"></a>1.谐波的叠加</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%信号波形：</span></span><br><span class="line">t1=<span class="number">-2</span>*<span class="built_in">pi</span>:<span class="number">0.001</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">y1=sawtooth(<span class="number">0.5</span>*t1,<span class="number">1</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"><span class="built_in">plot</span>(t1,y1);</span><br><span class="line"><span class="comment">%周期延拓 ：</span></span><br><span class="line">t2=<span class="number">-8</span>*<span class="built_in">pi</span>:<span class="number">0.001</span>:<span class="number">8</span>*<span class="built_in">pi</span>;</span><br><span class="line">y2=sawtooth(<span class="number">0.5</span>*<span class="built_in">mod</span>(t2,<span class="number">4</span>*<span class="built_in">pi</span>),<span class="number">1</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(t2,y2);</span><br><span class="line"><span class="comment">%谐波叠加：</span></span><br><span class="line">t=<span class="number">-2</span>*<span class="built_in">pi</span>:<span class="number">0.001</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">g=<span class="built_in">zeros</span>(<span class="built_in">size</span>(t));</span><br><span class="line">f=<span class="built_in">zeros</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="keyword">for</span> n=<span class="number">-11</span>:<span class="number">11</span></span><br><span class="line">g=<span class="number">1</span><span class="built_in">j</span>/(n*<span class="built_in">pi</span>);</span><br><span class="line">f=f+g*<span class="built_in">exp</span>(<span class="number">1</span><span class="built_in">j</span>*<span class="number">0.5</span>*t*n);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">y=sawtooth(<span class="number">0.5</span>*t,<span class="number">1</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;t&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(t,y);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(t,f);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;y 原函数&#x27;</span>,<span class="string">&#x27;f 谐波叠加波形图&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-方波的函数逼近"><a href="#2-方波的函数逼近" class="headerlink" title="2.方波的函数逼近"></a>2.方波的函数逼近</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">t = <span class="built_in">linspace</span>(<span class="number">0</span>, <span class="number">4</span>*<span class="built_in">pi</span>, <span class="number">1001</span>);</span><br><span class="line">n = <span class="number">200</span>;</span><br><span class="line"><span class="keyword">for</span> t1 = <span class="number">1</span> : <span class="built_in">length</span>(t)</span><br><span class="line">t2= t(t1);</span><br><span class="line">k = <span class="number">1</span> : n;</span><br><span class="line">a = <span class="built_in">sin</span>(t2* (<span class="number">2</span>*k<span class="number">-1</span>));</span><br><span class="line">b = <span class="number">2</span> * k - <span class="number">1</span>;</span><br><span class="line">theSum(t1) = sum(a ./ b);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">plot</span>(t,theSum);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">f=<span class="number">0.8</span>*square(t);</span><br><span class="line"><span class="built_in">plot</span>(t,f);</span><br><span class="line">axis([<span class="number">0</span> <span class="number">4</span>*<span class="built_in">pi</span> <span class="number">-1</span> <span class="number">1</span>]);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;square-wave&#x27;</span>,<span class="string">&#x27;square&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-吉布斯现象的验证"><a href="#3-吉布斯现象的验证" class="headerlink" title="3.吉布斯现象的验证"></a>3.吉布斯现象的验证</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">（<span class="number">1</span>）t=-<span class="built_in">pi</span>:<span class="number">0.001</span>:<span class="built_in">pi</span>;</span><br><span class="line">y=-<span class="built_in">pi</span>/<span class="number">2</span>*sawtooth(t);</span><br><span class="line">n=<span class="number">5</span>;</span><br><span class="line">f = <span class="built_in">zeros</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="keyword">for</span> n0=<span class="number">1</span>:n</span><br><span class="line">f=f+(<span class="built_in">sin</span>(n0*t))/n0;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">plot</span>(t,f);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(t,y);</span><br><span class="line">title([<span class="string">&#x27;n=&#x27;</span>, num2str(n)]);</span><br><span class="line">（<span class="number">3</span>）</span><br><span class="line">t=-<span class="built_in">pi</span>:<span class="number">0.001</span>:<span class="built_in">pi</span>;</span><br><span class="line">N=input(‘N=’);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>: N</span><br><span class="line">f = <span class="built_in">zeros</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">j</span></span><br><span class="line">f = f + (<span class="built_in">sin</span>(<span class="built_in">i</span>*t))/<span class="built_in">i</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">fmax(<span class="built_in">j</span>) = (<span class="built_in">max</span>(f)-<span class="built_in">pi</span>/<span class="number">2</span>)/<span class="built_in">pi</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>); <span class="built_in">plot</span>(t, f, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">y=-<span class="built_in">pi</span>/<span class="number">2</span>*sawtooth(t);</span><br><span class="line"><span class="built_in">plot</span>(t,y);axis([<span class="number">-4</span> <span class="number">4</span> <span class="number">-2</span> <span class="number">2</span>]) ;</span><br><span class="line">title([<span class="string">&#x27;N=&#x27;</span>, num2str(N)]);</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>); <span class="built_in">plot</span>(fmax) ;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;(f_&#123;n&#125;-f)/f(max)&#x27;</span>);</span><br><span class="line">axis([<span class="number">0</span> <span class="number">200</span> <span class="number">-0.2</span> <span class="number">0.15</span>]);</span><br><span class="line">title(<span class="string">&#x27;吉布斯现象&#x27;</span>);</span><br><span class="line">（<span class="number">4</span>）</span><br><span class="line">t=-<span class="built_in">pi</span>:<span class="number">0.001</span>:<span class="built_in">pi</span>;</span><br><span class="line">N=input(‘N=’);;</span><br><span class="line">F0= <span class="built_in">zeros</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:N</span><br><span class="line">f = <span class="built_in">zeros</span>(<span class="built_in">size</span>(t));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">j</span></span><br><span class="line">f = f + (<span class="built_in">sin</span>(<span class="built_in">i</span>*t))/<span class="built_in">i</span>;</span><br><span class="line">F0=F0+(<span class="built_in">sin</span>(<span class="built_in">i</span>*t))/<span class="built_in">i</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">F=F0/n;</span><br><span class="line">y=-<span class="built_in">pi</span>/<span class="number">2</span>*sawtooth(t);</span><br><span class="line"><span class="built_in">plot</span>(t, f);<span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(t,y);</span><br><span class="line"><span class="built_in">plot</span>(t,F) ;title([<span class="string">&#x27;n=&#x27;</span>, num2str(n)]);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;f_&#123;N&#125;(t)&#x27;</span>,<span class="string">&#x27;sawtooth&#x27;</span>,<span class="string">&#x27;F_&#123;N&#125;(t)&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="第三次"><a href="#第三次" class="headerlink" title="第三次"></a>第三次</h1><h3 id="1-傅里叶反变换"><a href="#1-傅里叶反变换" class="headerlink" title="1.傅里叶反变换"></a>1.傅里叶反变换</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">clc,clear  </span><br><span class="line">syms t;</span><br><span class="line">y=<span class="built_in">exp</span>(<span class="number">-2</span>*<span class="built_in">abs</span>(t));</span><br><span class="line">Y=fourier(y); <span class="comment">%µÃµ½F£¨w£©</span></span><br><span class="line"></span><br><span class="line">syms w £»</span><br><span class="line">FT = <span class="number">1</span>/(<span class="number">1</span>+w^<span class="number">2</span>);  </span><br><span class="line">f = ifourier(FT);  </span><br></pre></td></tr></table></figure>
+<h3 id="2-傅里叶变换的时移特性"><a href="#2-傅里叶变换的时移特性" class="headerlink" title="2.傅里叶变换的时移特性"></a>2.傅里叶变换的时移特性</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">syms t;</span><br><span class="line">f1= <span class="number">0.5</span>*<span class="built_in">exp</span>(<span class="number">-2</span>*t)*heaviside(t);</span><br><span class="line">F1=fourier(f1);</span><br><span class="line"></span><br><span class="line">f2 = <span class="built_in">exp</span>(<span class="number">-2</span>*(t<span class="number">-1</span>))*heaviside(t<span class="number">-1</span>)/<span class="number">2</span>; </span><br><span class="line">F2 = fourier(f2);  </span><br><span class="line"></span><br><span class="line">y1=<span class="built_in">abs</span>(F1);</span><br><span class="line">y2=<span class="built_in">angle</span>(F1);</span><br><span class="line"></span><br><span class="line">y3=<span class="built_in">abs</span>(F2);</span><br><span class="line">y4=<span class="built_in">angle</span>(F2);</span><br><span class="line"></span><br><span class="line">fplot(y4)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-观察幅度谱"><a href="#3-观察幅度谱" class="headerlink" title="3.观察幅度谱"></a>3.观察幅度谱</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">syms t;</span><br><span class="line">f1=heaviside(t+<span class="number">2</span>)-heaviside(t<span class="number">-2</span>);  </span><br><span class="line">f2=<span class="built_in">cos</span>(<span class="number">200</span>*<span class="built_in">pi</span>*t);  </span><br><span class="line">f3=(heaviside(t+<span class="number">2</span>)-heaviside(t<span class="number">-2</span>))*<span class="built_in">cos</span>(<span class="number">200</span>*<span class="built_in">pi</span>*t);  </span><br><span class="line">FT1 = fourier(f1);</span><br><span class="line">FT2 = fourier(f2);</span><br><span class="line">FT3 = fourier(f3);</span><br><span class="line"></span><br><span class="line">f1=<span class="built_in">abs</span>(FT1);  </span><br><span class="line">f2=<span class="built_in">abs</span>(FT2);  </span><br><span class="line">f3=<span class="built_in">abs</span>(FT3);  </span><br><span class="line"></span><br><span class="line">fplot(f3)</span><br></pre></td></tr></table></figure>
+
+<h1 id="第四次"><a href="#第四次" class="headerlink" title="第四次"></a>第四次</h1><h3 id="1-低通滤波器"><a href="#1-低通滤波器" class="headerlink" title="1.低通滤波器"></a>1.低通滤波器</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">clear;clc;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">4</span></span><br><span class="line">N=[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];<span class="comment">%阶数</span></span><br><span class="line">N1=N(<span class="built_in">i</span>);</span><br><span class="line">[z,p,k]=buttap(N1);<span class="comment">%求系统函数的零极点</span></span><br><span class="line">[b,a]=zp2tf(z,p,k);<span class="comment">%还原出系统函数</span></span><br><span class="line">n=<span class="number">0</span>:<span class="number">0.02</span>:<span class="number">2</span>;</span><br><span class="line">[h,w]=freqs(b,a,n);</span><br><span class="line">H=(<span class="built_in">abs</span>(h).^<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(w,H);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;N=2&#x27;</span>,<span class="string">&#x27;N=3&#x27;</span>,<span class="string">&#x27;N=4&#x27;</span>,<span class="string">&#x27;N=5&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"><span class="built_in">hold</span> off; </span><br></pre></td></tr></table></figure>
+<h3 id="2-系统极点分布"><a href="#2-系统极点分布" class="headerlink" title="2.系统极点分布"></a>2.系统极点分布</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">syms s t</span><br><span class="line">ft=<span class="number">1</span>/(t+<span class="number">2</span>);</span><br><span class="line">F1=laplace(ft,t,s);</span><br><span class="line"></span><br><span class="line">a1=[<span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">2</span>];</span><br><span class="line">b1=[<span class="number">1</span> <span class="number">1</span> <span class="number">2</span> <span class="number">6</span>];</span><br><span class="line">zplane(a1,b1)</span><br><span class="line">a2=[<span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span>];</span><br><span class="line">b2=[<span class="number">3</span> <span class="number">5</span> <span class="number">4</span> <span class="number">6</span>];</span><br><span class="line">zplane(a2,b2)</span><br><span class="line">grid on</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-响应"><a href="#3-响应" class="headerlink" title="3.响应"></a>3.响应</h3><p>```matlab<br>a=[1 3 2];<br>b=[1 0];<br>h1=impulse(b,a); %Çó³å¼¤ÏìÓ¦<br>h2=step(b,a); %Çó½×Ô¾ÏìÓ¦</p>
+<p>sys=tf(b,a);<br>t=0:0.01:5;<br>f=cos(20*t);<br>y=lsim(sys,f,t);<br>plot(t,y)<br>```s</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>BC</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youngbc.cn/2020/05/04/%E4%BF%A1%E5%8F%B7%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/">https://youngbc.cn/2020/05/04/%E4%BF%A1%E5%8F%B7%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Matlab/"># Matlab</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/05/05/2020%E6%95%B0%E6%A8%A1%E6%80%BB%E7%BB%93/">2020数模比赛总结</a>
+            
+            
+            <a class="next" rel="next" href="/2020/04/29/CTF%E4%B8%AD%E7%9A%84RSA/">CTF中的RSA</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© BC </span>
+    </div>
+	<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+	<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">陕ICP备20005804号</a> 
+    <div>
+	<img src="/image/youpaiyun.png" width="5%" /></a>
+	<a href="http://www.beian.miit.gov.cn/" target="_blank" ></a>
+    </div>
+
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="BC">
+
+
+
+
+
+<title>CTF中的RSA | BC&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">BC&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">BC&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">CTF中的RSA</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">BC</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 29, 2020&nbsp;&nbsp;18:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="RSA简单介绍"><a href="#RSA简单介绍" class="headerlink" title="RSA简单介绍"></a>RSA简单介绍</h3><p>import:<br>𝑁：公钥1   𝑑：公钥2   𝑒：私钥<br>𝐴：密文   𝐵：明文   φ()：欧拉函数<br>其中，N是两个大质数p、q的积，N的二进制表示时所占用的位数，就是所谓的密钥长度。<br>φ(n)=(p-1)(q-1),且 𝑔𝑐𝑑(𝑒,𝑁)=1 （互质，否则无解）<br>公钥 𝑑 由 𝑑∗𝑒≡1(𝑚𝑜𝑑φ(𝑁))① 计算出，此时称 𝑑 是 𝑒 的模反元素  </p>
+<p>加密公式： 𝐴𝑑≡𝐵(𝑚𝑜𝑑𝑁)   解密公式： 𝐵𝑒≡𝐴(𝑚𝑜𝑑𝑁)<br>数字签名： 𝐴𝑒≡𝐵(𝑚𝑜𝑑𝑁)   验证签名： 𝐵𝑑≡𝐴(𝑚𝑜𝑑𝑁)</p>
+<p>我们知道当 𝑝 和 𝑞 都为质数时，φ(𝑁)=φ(𝑝∗𝑞)=(𝑝−1)∗(𝑞−1)<br>故 ① 式变为：𝑑∗𝑒%(𝑝−1)∗(𝑞−1)=1<br>即 𝑑∗𝑒∗𝑥−(𝑝−1)∗(𝑞−1)∗𝑦=1 其中： 𝑥,𝑦∈𝑁  </p>
+<p>一般来说，RSA基本围绕着c,m,e,d,p,q,n这几个参数展开，但是题目一般不会直接给参数，需要我们自己手工提取。</p>
+<p>我们下来用到的代码都是基于python的gmpy2库,所以需要提前安装,具体安装自行查阅.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="comment"># gmpy2.mpz(x)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化一个大整数x</span></span><br><span class="line"></span><br><span class="line">gmpy2.mpfr(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化一个高精度浮点数x</span></span><br><span class="line"></span><br><span class="line">C = gmpy2.powmod(M,e,n)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 幂取模，结果是 C = (M^e) mod n</span></span><br><span class="line"></span><br><span class="line">d = gmpy2.invert(e,n) <span class="comment"># 求逆元，de = 1 mod n</span></span><br><span class="line"></span><br><span class="line">gmpy2.is_prime(n) <span class="comment"># 判断n是不是素数</span></span><br><span class="line"></span><br><span class="line">gmpy2.gcd(a,b) <span class="comment"># 欧几里得算法</span></span><br><span class="line"></span><br><span class="line">gmpy2.gcdext(a,b) <span class="comment"># 扩展欧几里得算法</span></span><br><span class="line"></span><br><span class="line">gmpy2.iroot(x,n) <span class="comment"># x开n次根</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="CTF中的RSA"><a href="#CTF中的RSA" class="headerlink" title="CTF中的RSA"></a>CTF中的RSA</h3><h4 id="1-已知e-p-q求d"><a href="#1-已知e-p-q求d" class="headerlink" title="1.已知e,p,q求d"></a>1.已知e,p,q求d</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">d = gmpy2.invert(e, (p<span class="number">-1</span>)*(q<span class="number">-1</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-已知e-d-n求p-q"><a href="#2-已知e-d-n求p-q" class="headerlink" title="2.已知e,d,n求p,q"></a>2.已知e,d,n求p,q</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gcd</span>(<span class="params">a, b</span>):</span>  </span><br><span class="line">   <span class="keyword">if</span> a &lt; b:  </span><br><span class="line">     a, b = b, a  </span><br><span class="line">   <span class="keyword">while</span> b != <span class="number">0</span>:  </span><br><span class="line">     temp = a % b  </span><br><span class="line">     a = b  </span><br><span class="line">     b = temp  </span><br><span class="line">   <span class="keyword">return</span> a  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getpq</span>(<span class="params">n,e,d</span>):</span>  </span><br><span class="line">    p = <span class="number">1</span>  </span><br><span class="line">    q = <span class="number">1</span>  </span><br><span class="line">    <span class="keyword">while</span> p==<span class="number">1</span> <span class="keyword">and</span> q==<span class="number">1</span>:  </span><br><span class="line">        k = d * e - <span class="number">1</span>  </span><br><span class="line">        g = random.randint ( <span class="number">0</span> , n )  </span><br><span class="line">        <span class="keyword">while</span> p==<span class="number">1</span> <span class="keyword">and</span> q==<span class="number">1</span> <span class="keyword">and</span> k % <span class="number">2</span> == <span class="number">0</span>:  </span><br><span class="line">            k /= <span class="number">2</span>  </span><br><span class="line">            y = pow(g,k,n)  </span><br><span class="line">            <span class="keyword">if</span> y!=<span class="number">1</span> <span class="keyword">and</span> gcd(y<span class="number">-1</span>,n)&gt;<span class="number">1</span>:  </span><br><span class="line">                p = gcd(y<span class="number">-1</span>,n)  </span><br><span class="line">                q = n/p  </span><br><span class="line">    <span class="keyword">return</span> p,q  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span>  </span><br><span class="line"> </span><br><span class="line">    n = <span class="number">0xa66791dc6988168de7ab77419bb7fb0c001c62710270075142942e19a8d8c51d053b3e3782a1de5dc5af4ebe99468170114a1dfe67cdc9a9af55d655620bbab</span>  </span><br><span class="line">    e =  <span class="number">0x10001</span></span><br><span class="line">    d =  <span class="number">0x123c5b61ba36edb1d3679904199a89ea80c09b9122e1400c09adcf7784676d01d23356a7d44d6bd8bd50e94bfc723fa87d8862b75177691c11d757692df8881</span></span><br><span class="line">    p,q = getpq(n,e,d)  </span><br><span class="line">    <span class="keyword">print</span> <span class="string">&quot;p: &quot;</span>+hex(p)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">&quot;q: &quot;</span>+hex(q)  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:  </span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-直接分解-n"><a href="#3-直接分解-n" class="headerlink" title="3.直接分解 n"></a>3.直接分解 n</h4><p>解决 RSA 题目最简单，最暴力的方法就是直接分解模数 。如果能够将n分解成功，成功得到p,q的取值，那么可求n的欧拉函数的值:<br>φ(n) = (p−1)(q−1)<br>而通过 e，d 与 n 的欧拉函数满足如下关系：<br>ed = 1 mod φ(n)<br>在知道e,p,q 的情况下，可以解出 d</p>
+<p>一个在线分解的网站：<a target="_blank" rel="noopener" href="http://factordb.com/">http://factordb.com/</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>BC</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youngbc.cn/2020/04/29/CTF%E4%B8%AD%E7%9A%84RSA/">https://youngbc.cn/2020/04/29/CTF%E4%B8%AD%E7%9A%84RSA/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Crypto/"># Crypto</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/05/04/%E4%BF%A1%E5%8F%B7%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/">信号系统实验</a>
+            
+            
+            <a class="next" rel="next" href="/2020/04/25/%E5%8F%88%E6%8B%8D%E4%BA%91CDN%E5%85%A8%E7%AB%99%E5%8A%A0%E9%80%9F+%E5%85%8D%E8%B4%B9Https/">又拍云CDN全站加速+免费Https</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© BC </span>
+    </div>
+	<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+	<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">陕ICP备20005804号</a> 
+    <div>
+	<img src="/image/youpaiyun.png" width="5%" /></a>
+	<a href="http://www.beian.miit.gov.cn/" target="_blank" ></a>
+    </div>
+
+
+
+    </div>
+</body>
+</html>

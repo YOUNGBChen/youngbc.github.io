@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="BC">
+
+
+
+
+
+<title>基于 Hexo 的 GitHub Pages 配置 CloudFlare CDN | BC&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">BC&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">BC&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">基于 Hexo 的 GitHub Pages 配置 CloudFlare CDN</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">BC</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 4, 2020&nbsp;&nbsp;11:09:12</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Hexo/">Hexo</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><p>由于 GitHub Pages 在国外，而且有时候因为图片过多等原因，静态博客页面在国内访问速度可能会非常慢，我们可以用 CDN 来加速，发现 CloudFlare 免费版没有流量限制，而且配置起来非常简单，所以在此选用 CloudFlare CDN 来加速页面访问。</p>
+<p>参考博客（七夏浅笑）<a target="_blank" rel="noopener" href="https://www.julydate.com/post/60859300/">https://www.julydate.com/post/60859300/</a></p>
+<h4 id="2-准备"><a href="#2-准备" class="headerlink" title="2.准备"></a>2.准备</h4><ul>
+<li>域名</li>
+<li>CloudFlare 账号</li>
+<li>github_username.github.io 静态博客</li>
+</ul>
+<h4 id="3-流程"><a href="#3-流程" class="headerlink" title="3.流程"></a>3.流程</h4><ul>
+<li>在 Hexo 博客 source 文件夹新建名为 CNAME 的文件，内容为个人域名（如果之前已经绑定过自己的域名可以忽略）；</li>
+<li>进入 CloudFlare 控制台，点击添加站点，输入个人域名，根据向导进行操作；</li>
+<li>在 CloudFlare DNS 配置页面配置两个 CNAME 均指向 github_username.github.io 地址：<br> 1） 根域名(@) CNAME 到 github_username.github.io<br> 2）子域名(www) CNAME 到 github_username.github.io</li>
+</ul>
+<ul>
+<li>将个人域名的 NS 记录修改为 CloudFlare 的 NS；</li>
+<li>等 CloudFlare DNS 解析生效后，并且 CloudFlare 站点状态为 Active 即表示配置生效。</li>
+</ul>
+<h4 id="关于CloudFlare-CDN-HTTP-强制跳转-HTTPS"><a href="#关于CloudFlare-CDN-HTTP-强制跳转-HTTPS" class="headerlink" title="关于CloudFlare CDN HTTP 强制跳转 HTTPS"></a>关于CloudFlare CDN HTTP 强制跳转 HTTPS</h4><ul>
+<li>HTTP是明文传输，数据很容易被窃取甚至篡改，HTTPS在HTTP的基础上设置了SSL证书，对传输中的数据进行机密，确保数据的安全性及真实性。</li>
+<li>其次，现在各大浏览器都在推进HTTPS的发展，SEO方面都给了HTTPS较好的排名，HTTP网站则给出了“不安全”的提示，很影响用户信任度和体验感。</li>
+<li>如果你的网站加载了大量资源，那么实施HTTPS是必须的。</li>
+</ul>
+<p>默认情况下配置完成后 HTTPS 是开启的，会在 24 小时内给你配的站点颁发 https 证书，并且证书是自动更新的。我们可以在 CloudFlare 控制台配置 HTTP 强制跳转 HTTPS：</p>
+<p>Edge Certificates</p>
+<p>然后就开启就ok了。</p>
+<p>现在我们的 Hexo 博客就实现了全站 HTTPS！</p>
+<p>最后附上：</p>
+<p><a target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/en-us/articles/200168196-How-do-I-minify-HTML-CSS-and-JavaScript-to-optimize-my-site-?mkt_tok=eyJpIjoiWkdVMU9HTTBZV0U1TXpVNCIsInQiOiJ0U3BNaEFBVExtMTRIVldvcjVwcmRLcTJQQVwvd0k2U0NRYVVUM3lcLzNXSzltVUNHOW5ka2YyYk5raWNTSGNOTzI1cHMxbHlcL2I3UHBpdit0bnFuQ29odkJcLzRmcFVnUG9aeThCd1pLcEd3ZkN4dnVaNFVXVm1qVnV2N25hKzJYbkIifQ==">How do I minify HTML, CSS and JavaScript to optimize my site?  如何缩小HTML, CSS和JavaScript优化</a></p>
+<p><a target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/en-us/articles/200168396-What-will-Cloudflare-compress-?mkt_tok=eyJpIjoiWkdVMU9HTTBZV0U1TXpVNCIsInQiOiJ0U3BNaEFBVExtMTRIVldvcjVwcmRLcTJQQVwvd0k2U0NRYVVUM3lcLzNXSzltVUNHOW5ka2YyYk5raWNTSGNOTzI1cHMxbHlcL2I3UHBpdit0bnFuQ29odkJcLzRmcFVnUG9aeThCd1pLcEd3ZkN4dnVaNFVXVm1qVnV2N25hKzJYbkIifQ==">What will Cloudflare compress?Cloudflare压缩</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>BC</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youngbc.cn/2020/02/04/%E5%9F%BA%E4%BA%8E-Hexo-%E7%9A%84-GitHub-Pages-%E9%85%8D%E7%BD%AE-CloudFlare-CDN/">https://youngbc.cn/2020/02/04/%E5%9F%BA%E4%BA%8E-Hexo-%E7%9A%84-GitHub-Pages-%E9%85%8D%E7%BD%AE-CloudFlare-CDN/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Hexo/"># Hexo</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/18/%E5%86%B3mysql8-0%E6%9C%8D%E5%8A%A1%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%E7%9A%84%E9%97%AE%E9%A2%98/">解决mysql8.0服务无法启动的问题</a>
+            
+            
+            <a class="next" rel="next" href="/2020/01/01/Ubuntu%E4%B8%8Bvs%20code%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Ubuntu下vs code不同语言环境配置</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© BC </span>
+    </div>
+	<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+	<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">陕ICP备20005804号</a> 
+    <div>
+	<img src="/image/youpaiyun.png" width="5%" /></a>
+	<a href="http://www.beian.miit.gov.cn/" target="_blank" ></a>
+    </div>
+
+
+
+    </div>
+</body>
+</html>

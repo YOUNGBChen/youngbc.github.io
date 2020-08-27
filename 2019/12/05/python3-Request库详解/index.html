@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="BC">
+
+
+
+
+
+<title>python3-Request库详解 | BC&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">BC&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">BC&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">python3-Request库详解</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">BC</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">December 5, 2019&nbsp;&nbsp;16:26:12</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/python/">python</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="python3-Request库详解"><a href="#python3-Request库详解" class="headerlink" title="python3-Request库详解"></a>python3-Request库详解</h1><p> <strong><em>通过urllib 的基本用法，但是其中确实有不方便的地方，比如处理网页验证和 Cookies 时，需要写 Opener 和 Handler<br>   来处理。 为了更加方便地实现这些操作，就有了更为强大的库 requests</em></strong></p>
+<h2 id="1-requests库简介"><a href="#1-requests库简介" class="headerlink" title="1.requests库简介"></a>1.requests库简介</h2><h4 id="1-1-requests库的安装"><a href="#1-1-requests库的安装" class="headerlink" title="1.1 requests库的安装"></a>1.1 requests库的安装</h4><p>在命令行界面中运行如下命令， 即可完成 requests 库的安装：<br>**<em>pip3 install requests**</em></p>
+<h4 id="1-2-基本用法"><a href="#1-2-基本用法" class="headerlink" title="1.2 基本用法"></a>1.2 基本用法</h4><p>urllib 库中的 urlopen（）方法实际上是以 GET 方式请求网页，而 requests 中相应的方法就是 get() 方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.get(<span class="string">&#x27;https://www.csdn.net/&#x27;</span>)</span><br><span class="line">print(type(r))</span><br><span class="line">print(r.status_code)</span><br><span class="line">print(type(r. text))</span><br><span class="line">print(r.text)</span><br><span class="line">print(r.cookies)</span><br></pre></td></tr></table></figure>
+<p>运行结果：<br><img src="https://img-blog.csdnimg.cn/20200126193256399.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ1NTMw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20200126193312102.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ1NTMw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><em>这里我们调用 get（）方法实现与 urlopen（）相同的操作，得到一个 Response 对象，然后分别输出 了 Response 的类型、状态码、响应体的类型、内容以及 Cookies。</em> </p>
+<h4 id="1-3-Get请求"><a href="#1-3-Get请求" class="headerlink" title="1.3 Get请求"></a>1.3 Get请求</h4><p>HTTP 中最常见的请求之一就是 GET请求</p>
+<ul>
+<li>构建一个最简单的 GET请求，请求的链接为  <em><a target="_blank" rel="noopener" href="http://httpbin.org/get">http://httpbin.org/get</a></em></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">r = requests.get(<span class="string">&#x27;http://httpbin.org/get&#x27;</span>)</span><br><span class="line">print(r.text)</span><br></pre></td></tr></table></figure>
+<p>运行结果<br><img src="https://img-blog.csdnimg.cn/20200126193832466.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ1NTMw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>如果要附加额外的信息，比如现在想添加两个参数， 其中 name 是 germey, age 是 22。 要构造这个请求链接<br><em>r = requests.get(‘<a target="_blank" rel="noopener" href="http://httpbin.org/get?name=germey&amp;age=22&#39;">http://httpbin.org/get?name=germey&amp;age=22&#39;</a>)</em></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">data=&#123;</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;germey&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span>:<span class="string">&#x27;22&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">r = requests.get(<span class="string">&#x27;http://httpbin.org/get&#x27;</span>,params=data)</span><br><span class="line">print(r.text)</span><br></pre></td></tr></table></figure>
+<p>运行结果<br><img src="https://img-blog.csdnimg.cn/20200126194237170.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ1NTMw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>抓取网页例如知乎<br>若代码是如下形式：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">r=requests.get(<span class="string">&quot;https://www.zhihu.com/&quot;</span>,)</span><br><span class="line">print(r.text)</span><br></pre></td></tr></table></figure>
+<p>运行结果<img src="https://img-blog.csdnimg.cn/20200126195101181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ1NTMw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这里我们加入headers信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mport requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">headers=&#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">r=requests.get(<span class="string">&quot;https://www.zhihu.com/&quot;</span>, headers=headers)</span><br><span class="line">print(r.text)</span><br></pre></td></tr></table></figure>
+<p>运行结果<img src="https://img-blog.csdnimg.cn/20200126195207289.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ1NTMw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>抓取二进制数据，下面以 GitHub 的站点图标为例</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-<span class="keyword">import</span> requests</span><br><span class="line">r=requests.get(<span class="string">&quot;https://github.com/favicon.ico&quot;</span>)</span><br><span class="line">print(r.text)</span><br><span class="line">print(r.content)</span><br></pre></td></tr></table></figure>
+<p>这里打印了 Response 对象的两个属性，一个是 text，另一个是 content<br><img src="https://img-blog.csdnimg.cn/20200126195549491.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ1NTMw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">接着，我们将刚才提取到的图片保存下来 ：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r=requests.get(<span class="string">&quot;https://github.com/favicon.ico&quot;</span>)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">&#x27;favicon&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(r.content)![在这里插入图片描述](https://img-blog.csdnimg.cn/<span class="number">20200126195924321.</span>png)</span><br></pre></td></tr></table></figure>
+<p>发现出现文件<br><img src="https://img-blog.csdnimg.cn/20200126195844988.png" alt="在这里插入图片描述"><br>我们刚刚保存的图片<br><img src="https://img-blog.csdnimg.cn/2020012620003383.png" alt="在这里插入图片描述"></p>
+<h4 id="1-4-Post请求"><a href="#1-4-Post请求" class="headerlink" title="1.4 Post请求"></a>1.4 Post请求</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">data=&#123; <span class="string">&#x27;age&#x27;</span>:<span class="string">&#x27;22&#x27;</span>&#125;</span><br><span class="line">r=requests.post(<span class="string">&quot;http://httpbin.org/post&quot;</span>,data=data)</span><br><span class="line">print(r.text)</span><br></pre></td></tr></table></figure>
+<p>输出结果<img src="https://img-blog.csdnimg.cn/20200126200542921.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ1NTMw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="1-5-响应"><a href="#1-5-响应" class="headerlink" title="1.5 响应"></a>1.5 响应</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">r=requests.get(<span class="string">&quot;https://www.csdn.net/&quot;</span>)</span><br><span class="line">print(r.status_code)</span><br><span class="line">print(r.headers)</span><br><span class="line">print(r.cookies)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果<br><img src="https://img-blog.csdnimg.cn/20200126200822214.png" alt="在这里插入图片描述"><em>状态码常用来判断请求是否成功，而 requests 还提供了一个内置的状态码查询对象 requests.codes,</em></p>
+<h2 id="2-高级用法"><a href="#2-高级用法" class="headerlink" title="2.高级用法"></a>2.高级用法</h2><h4 id="2-1-文件上传"><a href="#2-1-文件上传" class="headerlink" title="2.1 文件上传"></a>2.1 文件上传</h4><p>requests 可以模拟提交一些数据。 假如有的网站需要上传文件，我们也可以用它来实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests </span><br><span class="line">files = &#123;<span class="string">&#x27;file &#x27;</span> : open (’favicon.ico’,<span class="string">&#x27;rb’)&#125; </span></span><br><span class="line"><span class="string">r = requests.post(”http://httpbin.org/post”, files=files) print(r.text) </span></span><br></pre></td></tr></table></figure>
+<p>在前一节中我们保存了一个文件 favicon.ico，这次用它来模拟文件上传的过程。 需要注意的是， favicon.ico 需要和当前脚本在同一 目录下。 </p>
+<h4 id="2-2-Cookies"><a href="#2-2-Cookies" class="headerlink" title="2.2 Cookies"></a>2.2 Cookies</h4><p>前面我们使用 urllib 处理过 Cookies，写法比较复杂，而有了 requests，获取和设置 Cookies 只需 一步即可完成。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">r=requests.get(<span class="string">&quot;https://www.baidu.com&quot;</span>)</span><br><span class="line">print(r.cookies)</span><br></pre></td></tr></table></figure>
+<p>我们也可以直接用 Cookie 来维持登录状态<br><img src="https://img-blog.csdnimg.cn/20200126201952959.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ1NTMw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">headers=&#123;</span><br><span class="line">    <span class="string">&#x27;Cookie&#x27;</span>:<span class="string">&#x27;_zap=2c12f14e-ef5d-4afc-ab3e-af33e0d7ed0b; d_c0=&quot;ANDsdiitNxCPTspQdwQQy2y1EwauWeT9H3M=|1571394286&quot;; _xsrf=APdnMsYkSILBvUiKknwPxvtpK6EOacPA; r_cap_id=&quot;NmRmZDY1NmM0YzZjNGE3Njg5YmM1MzM5MjNhNzI3ZjE=|1579144278|231a7c1fec00014281cfb717ea77867c2e122535&quot;; cap_id=&quot;Y2VlODAxNWYwYzIyNDQ3NTlkZThhZDkwNDhhZTNiMDc=|1579144277|bc245c6af50afe5749eab0f8d357161829810f6a&quot;; l_cap_id=&quot;YjQwNzAzNmYzMTA0NDkwZjliOGI0OWYyMzVmNzYxYzM=|1579144278|f2e2c15cfd95c7af51ddf9997ca386d4a3711824&quot;; auth_type=cXFjb25u|1579144288|87cf27a6b4af8d334fa5435775572d18aee1f21d; token=&quot;QzUzMjlDNTM0NDhCQTExQjk1NEY1MUY0QTU0RTRDOUY=|1579144288|96f52c6bcd169ef7b62b98719ce2f5dbce8e9313&quot;; client_id=&quot;RDRENDRBRjc1OUI0RjIxMDQ2REExRkY2RENFQzdFRjc=|1579144288|cae4206c32d633d8cf04e059304df93b27557e9c&quot;; capsion_ticket=&quot;2|1:0|10:1579144305|14:capsion_ticket|44:N2E3MjE1OTBkNzhiNGE0ZGE3YmFmNzU1ODU5NDU5NGE=|73d1cd2ba8a22e91ad5afa6d35967b23f0b493afe0442a2fa02a94361aec0afd&quot;; z_c0=&quot;2|1:0|10:1579144348|4:z_c0|92:Mi4xMDlyZ0F3QUFBQUFBME94MktLMDNFQ2NBQUFDRUFsVk5tMkZIWGdCUnFHOEotN1I1QzdmQmNHc29FOC1xUXdmZDJn|2516938d91343daf8e7424f789c79c9908672429bdb7a45bedf499c3a4346846&quot;; tst=r; Hm_lvt_98beee57fd2ef70ccdd5ca52b9740c49=1579144204,1580039199; Hm_lpvt_98beee57fd2ef70ccdd5ca52b9740c49=1580040949; KLBRSID=ca494ee5d16b14b649673c122ff27291|1580040953|1580039197&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Host&#x27;</span>:<span class="string">&#x27;https://www.zhihu.com&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">r=requests.get(<span class="string">&quot;https://zhihu.com&quot;</span>,headers=headers)</span><br><span class="line">print(r.text)</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-会话维持"><a href="#2-3-会话维持" class="headerlink" title="2.3 会话维持"></a>2.3 会话维持</h4><p>解决这个问题的主要方法就是维持同一个会话， 也就是相当于打开一个新的浏览器选项 卡而不是新开一个浏览器。 但是我又不想每次设置 cookies ，那该怎么办呢？这时候就有了Session 对象。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests </span><br><span class="line">s = requests. Session()</span><br><span class="line">s.get(’http: //httpbin.org/cookies/set/number/<span class="number">123456789</span><span class="string">&#x27;) </span></span><br><span class="line"><span class="string">r = s.get(’http://httpbin.org/cookies &#x27;</span>) </span><br><span class="line">print(r.text) </span><br></pre></td></tr></table></figure>
+<p>利用 Session ，可以做到模拟同一个会话而不用担心 Cookies 的问题。 它通常用于模拟登录 成功之后再进行下一步的操作。</p>
+<h4 id="2-4-SSL证书验证"><a href="#2-4-SSL证书验证" class="headerlink" title="2.4 SSL证书验证"></a>2.4 SSL证书验证</h4><p>12306 的证书没有被官方 CA 机构信任，会阳现证书验证错误的结果。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests </span><br><span class="line">response = requests.get(’https://WVM<span class="number">.12306</span>.cn’)</span><br><span class="line">print(response.status code) </span><br></pre></td></tr></table></figure>
+<p>这里提示一个错误 SSLError，表示证书验证错误</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests </span><br><span class="line">response = requests.get(’https: I /www <span class="number">.12306</span>. en ’, verify=<span class="literal">False</span>)</span><br><span class="line">print(response.status_code) </span><br></pre></td></tr></table></figure>
+<p>把 verify 参数设置为 False 即可避开错误</p>
+<h4 id="2-5-代理设置"><a href="#2-5-代理设置" class="headerlink" title="2.5 代理设置"></a>2.5 代理设置</h4><p>对于某些网站，在测试的时候请求几次， 能正常获取内容。 但是一旦开始大规模爬取，对于大规 模且频繁的请求，网站可能会弹出验证码，或者跳转到登录认证页面， 更甚者可能会直接封禁客户端 的 IP，导致一定时间段内无法访问。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests </span><br><span class="line">proxies = &#123; <span class="string">&quot;https&quot;</span>:http: I <span class="number">110</span> <span class="number">.10</span><span class="number">.1</span><span class="number">.10</span>: <span class="number">3128</span><span class="string">&quot;, </span></span><br><span class="line"><span class="string">			&quot;</span>https<span class="string">&quot;：vhttp: //10.10.1.10: 1080&quot;</span>, </span><br><span class="line">&#125;</span><br><span class="line">requests.get（https://www.taobao. com<span class="string">&quot; , proxies=proxies) </span></span><br></pre></td></tr></table></figure>
+<p><strong><em>请换成自己的有效代理试验</em></strong> </p>
+<h4 id="2-6-超时设置"><a href="#2-6-超时设置" class="headerlink" title="2.6 超时设置"></a>2.6 超时设置</h4><p>需要用到 timeout 参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.get（<span class="string">&#x27;https://www.taobao.com&#x27;</span>.timeout=<span class="number">1</span>)</span><br><span class="line">print(r.status_code)</span><br></pre></td></tr></table></figure>
+<p>如果想永久等待，可以直接将 timeout 设置为 None，或者不设置直接留空</p>
+<h4 id="2-7-身份认证"><a href="#2-7-身份认证" class="headerlink" title="2.7 身份认证"></a>2.7 身份认证</h4><p>在访问网站时，我们可能会遇到这样的认证页面<br><img src="https://img-blog.csdnimg.cn/20200126202848777.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ1NTMw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>此时可以使用 requests 自带的身份认证功能</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests </span><br><span class="line">r = requests .get(<span class="string">&#x27; http: I /localhost: sooo&#x27;</span> , auth＝（’ username ＇ ，’ password<span class="string">&#x27;))</span></span><br><span class="line"><span class="string">print(r.status_ code) </span></span><br></pre></td></tr></table></figure>
+<p> requests 还提供了其他认证方式，如 OAuth 认证,更多详细的功能可以参考 requests_oauthlib 的官方文档<br> <a target="_blank" rel="noopener" href="https://requests-oauthlib.readthedocs.org/">https://requests-oauthlib.readthedocs.org/
+ </a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>BC</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youngbc.cn/2019/12/05/python3-Request%E5%BA%93%E8%AF%A6%E8%A7%A3/">https://youngbc.cn/2019/12/05/python3-Request%E5%BA%93%E8%AF%A6%E8%A7%A3/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/python/"># python</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/12/06/python%E7%88%AC%E8%99%AB-PyQuery%E8%AF%A6%E8%A7%A3/">python爬虫-PyQuery详解</a>
+            
+            
+            <a class="next" rel="next" href="/2019/12/01/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%B7%BB%E5%8A%A0Live-2D%E6%A8%A1%E5%9E%8B/">Hexo博客中添加Live 2D模型</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© BC </span>
+    </div>
+	<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+	<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">陕ICP备20005804号</a> 
+    <div>
+	<img src="/image/youpaiyun.png" width="5%" /></a>
+	<a href="http://www.beian.miit.gov.cn/" target="_blank" ></a>
+    </div>
+
+
+
+    </div>
+</body>
+</html>

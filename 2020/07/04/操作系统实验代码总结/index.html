@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="BC">
+
+
+
+
+
+<title>操作系统实验CODE | BC&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">BC&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">BC&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">操作系统实验CODE</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">BC</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 4, 2020&nbsp;&nbsp;10:06:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ol>
+<li><p>拷贝文件模仿cp命令</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> ** argv)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(argc != <span class="number">3</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Error\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">char</span> buff;</span><br><span class="line">	<span class="keyword">int</span> src,dsr;</span><br><span class="line">	src = open(argv[<span class="number">1</span>],O_RDONLY|O_CREAT,<span class="number">0644</span>);</span><br><span class="line">	dsr = open(argv[<span class="number">2</span>],O_RDONLY|O_CREAT,<span class="number">0644</span>);</span><br><span class="line">	<span class="keyword">while</span>(read(src,&amp;buff,<span class="number">1</span>))&#123;</span><br><span class="line"> 		write(dsr,&amp;buff,<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	close(src);</span><br><span class="line">	close(dsr);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;over\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写一个shell</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>多线程排序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> sort[<span class="number">10</span>]=&#123;<span class="number">7</span>,<span class="number">12</span>,<span class="number">19</span>,<span class="number">3</span>,<span class="number">18</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">15</span>,<span class="number">8</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> sorted[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">front</span><span class="params">(<span class="keyword">void</span> *arg)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">int</span> min;</span><br><span class="line">	<span class="keyword">int</span> tmp;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">		min=i;</span><br><span class="line">		<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;<span class="number">5</span>;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(sort[min]&gt;sort[j])</span><br><span class="line">				min=j;		</span><br><span class="line">		&#125;	</span><br><span class="line">		tmp=sort[i];</span><br><span class="line">		sort[i]=sort[min];</span><br><span class="line">		sort[min]=tmp;</span><br><span class="line">	&#125;		</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">end</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">int</span> min;</span><br><span class="line">	<span class="keyword">int</span> tmp;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">5</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">		min=i;</span><br><span class="line">		<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;<span class="number">10</span>;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(sort[min]&gt;sort[j])</span><br><span class="line">				min=j;		</span><br><span class="line">		&#125;	</span><br><span class="line">		tmp=sort[i];</span><br><span class="line">		sort[i]=sort[min];</span><br><span class="line">		sort[min]=tmp;</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">array</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">5</span>,k=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;<span class="number">5</span>&amp;&amp;j&lt;<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(sort[i]&lt;sort[j])</span><br><span class="line">                    sorted[k++]=sort[i++];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                    sorted[k++]=sort[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;<span class="number">5</span>)</span><br><span class="line">                sorted[k++]=sort[i++];</span><br><span class="line">        <span class="keyword">while</span>(j&lt;<span class="number">10</span>)</span><br><span class="line">                sorted[k++]=sort[j++];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">pthread_t</span> pid;</span><br><span class="line">	pthread_create(&amp;pid,<span class="literal">NULL</span>,&amp;front,<span class="literal">NULL</span>);</span><br><span class="line">	end();</span><br><span class="line">	pthread_join(pid,<span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">array</span>();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sorted array: &quot;</span>);</span><br><span class="line">	<span class="keyword">int</span> i;	</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,sorted[i]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生产者消费者</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;semaphore.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUFFER_SIZE 5</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> buffer_item;</span><br><span class="line"></span><br><span class="line"><span class="comment">//semaphores</span></span><br><span class="line"><span class="keyword">sem_t</span> empty, full, mutex;</span><br><span class="line"></span><br><span class="line"><span class="comment">//buffer</span></span><br><span class="line">buffer_item buffer[BUFFER_SIZE];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> in, out;</span><br><span class="line"></span><br><span class="line"><span class="comment">//存储数据的结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">int</span> opTime;</span><br><span class="line">    <span class="keyword">int</span> lastTime;</span><br><span class="line">    <span class="keyword">int</span> productId;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//有限缓存插入--生产</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">insert_item</span><span class="params">(buffer_item item)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/* insert item into buffer */</span></span><br><span class="line">    buffer[out] = item;</span><br><span class="line">    out = (out + <span class="number">1</span>) % BUFFER_SIZE;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//有限缓存删除--消费</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">remove_item</span><span class="params">(buffer_item *item)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/* remove an object from buffer and then place it in item */</span></span><br><span class="line">    *item = buffer[in];</span><br><span class="line">    in = (in + <span class="number">1</span>) % BUFFER_SIZE;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//生产者</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">producer</span><span class="params">(<span class="keyword">void</span>* param)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> productId = ((struct data*)param)-&gt;productId;</span><br><span class="line">    <span class="keyword">int</span> lastTime = ((struct data*)param)-&gt;lastTime;</span><br><span class="line">    <span class="keyword">int</span> opTime = ((struct data*)param)-&gt;opTime;</span><br><span class="line">    <span class="keyword">int</span> id = ((struct data*)param)-&gt;id;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(param);</span><br><span class="line"></span><br><span class="line">    sleep(opTime);</span><br><span class="line">    sem_wait(&amp;empty);</span><br><span class="line">    sem_wait(&amp;mutex);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* critical section */</span></span><br><span class="line">    <span class="comment">//add a item</span></span><br><span class="line">    insert_item(productId);</span><br><span class="line">    sleep(lastTime);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Thread %d: Producer produce %d\n&quot;</span>, id, productId);</span><br><span class="line"></span><br><span class="line">    sem_post(&amp;mutex);</span><br><span class="line">    sem_post(&amp;full);</span><br><span class="line">    pthread_exit(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//消费者</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">consumer</span><span class="params">(<span class="keyword">void</span>* param)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> lastTime = ((struct data*)param)-&gt;lastTime;</span><br><span class="line">    <span class="keyword">int</span> opTime = ((struct data*)param)-&gt;opTime;</span><br><span class="line">    <span class="keyword">int</span> id = ((struct data*)param)-&gt;id;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(param);</span><br><span class="line"></span><br><span class="line">    sleep(opTime);</span><br><span class="line">    sem_wait(&amp;full);</span><br><span class="line">    sem_wait(&amp;mutex);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* critical section */</span></span><br><span class="line">    <span class="comment">//remove a item</span></span><br><span class="line">    buffer_item item;</span><br><span class="line">    remove_item(&amp;item);</span><br><span class="line">    sleep(lastTime);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Thread %d: Consumer consume %d\n&quot;</span>, id, item);</span><br><span class="line"></span><br><span class="line">    sem_post(&amp;mutex);</span><br><span class="line">    sem_post(&amp;empty);</span><br><span class="line">    pthread_exit(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//pthread</span></span><br><span class="line">    <span class="keyword">pthread_t</span> tid; <span class="comment">// the thread identifier</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">pthread_attr_t</span> attr; <span class="comment">//set of thread attributes</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* get the default attributes */</span></span><br><span class="line">    pthread_attr_init(&amp;attr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//initial the semaphores</span></span><br><span class="line">    sem_init(&amp;mutex, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    sem_init(&amp;empty, <span class="number">0</span>, BUFFER_SIZE);</span><br><span class="line">    sem_init(&amp;full, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    in = out = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> id = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;id) != EOF) &#123;</span><br><span class="line">        <span class="keyword">char</span> role;      <span class="comment">//producer or consumer</span></span><br><span class="line">        <span class="keyword">int</span> opTime;     <span class="comment">//operating time</span></span><br><span class="line">        <span class="keyword">int</span> lastTime;   <span class="comment">//run time</span></span><br><span class="line">        <span class="keyword">int</span> productId;  <span class="comment">//product id</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c%d%d&quot;</span>, &amp;role, &amp;opTime, &amp;lastTime);</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">data</span>* <span class="title">d</span> = (<span class="title">struct</span> <span class="title">data</span>*)<span class="title">malloc</span>(<span class="title">sizeof</span>(<span class="title">struct</span> <span class="title">data</span>));</span></span><br><span class="line">        d-&gt;id = id;</span><br><span class="line">        d-&gt;opTime = opTime;</span><br><span class="line">        d-&gt;lastTime = lastTime;</span><br><span class="line">        <span class="keyword">if</span>(role == <span class="string">&#x27;P&#x27;</span>) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;productId);</span><br><span class="line">            d-&gt;productId = productId;</span><br><span class="line">            pthread_create(&amp;tid, &amp;attr, producer, d);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(role == <span class="string">&#x27;C&#x27;</span>)</span><br><span class="line">            pthread_create(&amp;tid, &amp;attr, consumer, d);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//释放信号量</span></span><br><span class="line">    sem_destroy(&amp;mutex);</span><br><span class="line">    sem_destroy(&amp;empty);</span><br><span class="line">    sem_destroy(&amp;full);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>BC</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youngbc.cn/2020/07/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81%E6%80%BB%E7%BB%93/">https://youngbc.cn/2020/07/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81%E6%80%BB%E7%BB%93/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"># 操作系统</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/07/23/%E5%8F%8C%E7%B3%BB%E7%BB%9FUbuntu16.04%E5%8D%B8%E8%BD%BD/">双系统Ubuntu16.04卸载</a>
+            
+            
+            <a class="next" rel="next" href="/2020/05/28/Flask-Jinja2%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/">Flask/Jinja2模板注入中的一些绕过姿势</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© BC </span>
+    </div>
+	<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+	<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">陕ICP备20005804号</a> 
+    <div>
+	<img src="/image/youpaiyun.png" width="5%" /></a>
+	<a href="http://www.beian.miit.gov.cn/" target="_blank" ></a>
+    </div>
+
+
+
+    </div>
+</body>
+</html>

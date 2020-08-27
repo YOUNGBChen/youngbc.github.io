@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="BC">
+
+
+
+
+
+<title>GKCTF2020-wp(crypto) | BC&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">BC&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">BC&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">GKCTF2020-wp(crypto)</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">BC</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 24, 2020&nbsp;&nbsp;12:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h4 id="1-Crypto-小学生的密码学"><a href="#1-Crypto-小学生的密码学" class="headerlink" title="1.Crypto-小学生的密码学"></a>1.Crypto-小学生的密码学</h4><p>简单的仿射密码<br>解密：<a target="_blank" rel="noopener" href="http://ctf.ssleye.com/affine.html">http://ctf.ssleye.com/affine.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_24568351/article/details/65084529">https://blog.csdn.net/sinat_24568351/article/details/65084529</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wzl_fd/article/details/82798040?utm_medium=distribute.pc_relevant.none-task-blog-baidujs-1">https://blog.csdn.net/wzl_fd/article/details/82798040?utm_medium=distribute.pc_relevant.none-task-blog-baidujs-1</a></p>
+<h4 id="2-babycrypto"><a href="#2-babycrypto" class="headerlink" title="2.babycrypto"></a>2.babycrypto</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#n:0xb119849bc4523e49c6c038a509a74cda628d4ca0e4d0f28e677d57f3c3c7d0d876ef07d7581fe05a060546fedd7d061d3bc70d679b6c5dd9bc66c5bdad8f2ef898b1e785496c4989daf716a1c89d5c174da494eee7061bcb6d52cafa337fc2a7bba42c918bbd3104dff62ecc9d3704a455a6ce282de0d8129e26c840734ffd302bec5f0a66e0e6d00b5c50fa57c546cff9d7e6a978db77997082b4cb927df9847dfffef55138cb946c62c9f09b968033745b5b6868338c64819a8e92a827265f9abd409359a9471d8c3a2631b80e5b462ba42336717700998ff38536c2436e24ac19228cd2d7a909ead1a8494ff6c3a7151e888e115b68cc6a7a8c6cf8a6c005L</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># e:65537</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#enc:1422566584480199878714663051468143513667934216213366733442059106529451931078271460363335887054199577950679102659270179475911101747625120544429262334214483688332111552004535828182425152965223599160129610990036911146029170033592055768983427904835395850414634659565092191460875900237711597421272312032796440948509724492027247376113218678183443222364531669985128032971256792532015051829041230203814090194611041172775368357197854451201260927117792277559690205342515437625417792867692280849139537687763919269337822899746924269847694138899165820004160319118749298031065800530869562704671435709578921901495688124042302500361</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#p&gt;&gt;128&lt;&lt;128:0xe4e4b390c1d201dae2c00a4669c0865cc5767bc444f5d310f3cfc75872d96feb89e556972c99ae20753e3314240a52df5dccd076a47c6b5d11b531b92d901b2b512aeb0b263bbfd624fe3d52e5e238beeb581ebe012b2f176a4ffd1e0d2aa8c4d3a2656573b727d4d3136513a931428b00000000000000000000000000000000L</span></span><br></pre></td></tr></table></figure>
+<p>是已知p的高位，将低位给搞出来。<br><a target="_blank" rel="noopener" href="https://github.com/Zui-Qing-Feng/RSA">https://github.com/Zui-Qing-Feng/RSA</a><br>得出p就可以求出q</p>
+<ul>
+<li>q = n/p = 139091353059018128421744751525080056530307965918298875691299992775484064426591581456998968315582349027071987206340653988925923465225471661893944397744293391269274124345189028818977002600599732469824164218366399726233373069742839737062004061244787413638290767590029376062508897417109117189614458570241407458359</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2 <span class="keyword">as</span> gp </span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line">p = <span class="number">160734387026849747944319274262095716650717626398118440194223452208652532694713113062084219512359968722796763029072117463281356654614167941930993838521563406258263299846297499190884495560744873319814150988520868951045961906000066805136724505347218275230562125457122462589771119429631727404626489634314291445667</span></span><br><span class="line">q = <span class="number">139091353059018128421744751525080056530307965918298875691299992775484064426591581456998968315582349027071987206340653988925923465225471661893944397744293391269274124345189028818977002600599732469824164218366399726233373069742839737062004061244787413638290767590029376062508897417109117189614458570241407458359</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">c = <span class="number">1422566584480199878714663051468143513667934216213366733442059106529451931078271460363335887054199577950679102659270179475911101747625120544429262334214483688332111552004535828182425152965223599160129610990036911146029170033592055768983427904835395850414634659565092191460875900237711597421272312032796440948509724492027247376113218678183443222364531669985128032971256792532015051829041230203814090194611041172775368357197854451201260927117792277559690205342515437625417792867692280849139537687763919269337822899746924269847694138899165820004160319118749298031065800530869562704671435709578921901495688124042302500361</span></span><br><span class="line">p = gp.mpz(p)</span><br><span class="line">q = gp.mpz(q)</span><br><span class="line">e = gp.mpz(e)</span><br><span class="line">c = gp.mpz(c)</span><br><span class="line"></span><br><span class="line">n = p*q</span><br><span class="line">phi = (p<span class="number">-1</span>) * (q<span class="number">-1</span>)</span><br><span class="line">d = gp.invert(e, phi)</span><br><span class="line"><span class="comment">#print(&#x27;d=&#x27;,d)</span></span><br><span class="line">m = pow(c, d, n) </span><br><span class="line"><span class="comment">#print(&#x27;m=&#x27;,m)</span></span><br><span class="line">print(<span class="string">&#x27;hex(m)=&#x27;</span>,hex(m)[<span class="number">2</span>:])</span><br><span class="line">print(<span class="string">&#x27;bytes.fromhex(hex(m)=&#x27;</span>,bytes.fromhex(hex(m)[<span class="number">2</span>:]))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="3-汉字的秘密"><a href="#3-汉字的秘密" class="headerlink" title="3.汉字的秘密"></a>3.汉字的秘密</h4><p>当铺密码，当前汉字有多少笔画出头，就是转化成数字几<br>转换后发现，<br>69 74 62 67 118 83 72 77 86 55 71 57 82 57 64 63 51 107<br>EJ&gt;vSHMV7G9R9@?3k<br>然后变异凯撒就行</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n[<span class="number">18</span>]=&#123;<span class="number">69</span>,<span class="number">74</span>,<span class="number">62</span>,<span class="number">67</span>,<span class="number">118</span>,<span class="number">83</span>,<span class="number">72</span>,<span class="number">77</span>,<span class="number">86</span>,<span class="number">55</span>,<span class="number">71</span>,<span class="number">57</span>,<span class="number">82</span>,<span class="number">57</span>,<span class="number">64</span>,<span class="number">63</span>,<span class="number">51</span>,<span class="number">107</span>&#125;;</span><br><span class="line">	<span class="keyword">int</span> i,j=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">18</span>;i++)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,n[i]+j);</span><br><span class="line">		j++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-Backdoor"><a href="#4-Backdoor" class="headerlink" title="4.Backdoor"></a>4.Backdoor</h4><p>类似<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/CliffordR/article/details/82747112">https://blog.csdn.net/CliffordR/article/details/82747112</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>BC</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youngbc.cn/2020/05/24/GKCTF2020-wp/">https://youngbc.cn/2020/05/24/GKCTF2020-wp/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CTF%E6%AF%94%E8%B5%9BWP/"># CTF比赛WP</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/05/26/csaw-ctf-2016-quals-mfw/">csaw-ctf-2016-quals-mfw</a>
+            
+            
+            <a class="next" rel="next" href="/2020/05/23/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E7%BB%95%E8%BF%87%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%20__wakeup/">php反序列化漏洞绕过魔术方法 __wakeup</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© BC </span>
+    </div>
+	<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+	<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">陕ICP备20005804号</a> 
+    <div>
+	<img src="/image/youpaiyun.png" width="5%" /></a>
+	<a href="http://www.beian.miit.gov.cn/" target="_blank" ></a>
+    </div>
+
+
+
+    </div>
+</body>
+</html>

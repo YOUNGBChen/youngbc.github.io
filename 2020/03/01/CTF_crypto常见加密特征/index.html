@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="BC">
+
+
+
+
+
+<title>CTF_crypto常见加密特征 | BC&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">BC&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">BC&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/link">Link</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">CTF_crypto常见加密特征</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">BC</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">March 1, 2020&nbsp;&nbsp;10:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>大概做完了BUUCTF crypto部分的基础题目,大概七八十道?不到100道的样子,总结一些常见的加密字符串的特征，供自己和他人查阅吧,最主要还是方便自己。这些都是一些最基础的,有一些不太常见的密码类型会在另外一篇说.<br>#</p>
+<h3 id="给出一些网站-持续更新"><a href="#给出一些网站-持续更新" class="headerlink" title="给出一些网站(持续更新)"></a>给出一些网站(持续更新)</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://quipqiup.com/">https://quipqiup.com/</a> 简单替换密码可以直接用这个.比如凯撒之类的,很好用.</li>
+</ul>
+<h4 id="1-ASCII编码"><a href="#1-ASCII编码" class="headerlink" title="1.ASCII编码"></a>1.ASCII编码</h4><p>常是用字符所对应的ASCII编码的十进制表示字符</p>
+<blockquote>
+<p>89 79 85 78 71 66 67 </p>
+</blockquote>
+<p>若遇到连续的一堆分割的10进制数用python写个脚本试试即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">o_str = <span class="string">&#x27;89 79 85 78 71 66 67&#x27;</span></span><br><span class="line">o_str = o_str.split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">d_str = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> o_str:</span><br><span class="line">    d_str += chr(int(i))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(d_str)</span><br><span class="line"><span class="comment">#运行结果YOUNGBC</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-Base32-64-58"><a href="#2-Base32-64-58" class="headerlink" title="2.Base32/64/58"></a>2.Base32/64/58</h4><p>base32的编码表是由（A-Z、2-7）32个可见字符构成，“=”符号用作后缀填充。<br>base64的编码表是由（A-Z、a-z、0-9、+、/）64个可见字符构成，“=”符号用作后缀填充。<br>base58的编码表相比base64少了数字0，大写字母I，O，小写字母 l (这个是L），以及符号‘+’和‘/’<br>base系列的编码，通常特征值都是在一堆大小写字母和数字后加1-2个等号，若无等号，只存在字母和数字，也可能是base编码，通常是base64。</p>
+<blockquote>
+<p>原文:I am BC from XAC<br>base64:SSBhbSBCQyBmcm9tIFhBQw==<br>base32:JEQGC3JAIJBSAZTSN5WSAWCBIM==<br>base58</p>
+</blockquote>
+<h4 id="3-凯撒密码"><a href="#3-凯撒密码" class="headerlink" title="3.凯撒密码"></a>3.凯撒密码</h4><p>凯撒密码是一种古典加密方式，是替换加密，通常明文中的所有字母都在字母表上向后（或向前）按照一个固定数目进行偏移后被替换成密文。<br>这种题目，一般题目中也是有提示的，告诉你加密方式和偏移量，然后写脚本得到flag就好。<br>会存在一些变异凯撒的情况,他的位移量会递增或者递减,这个需要注意.</p>
+<h4 id="4-rot5-13-18-47"><a href="#4-rot5-13-18-47" class="headerlink" title="4.rot5/13/18/47"></a>4.rot5/13/18/47</h4><p>ROT5：只对数字进行编码，用当前数字往前数的第5个数字替换当前数字，<br>ROT13：只对字母进行编码，用当前字母往前数的第13个字母替换当前字母，<br>ROT18：这是一个异类，本来没有，它是将ROT5和ROT13组合在一起，将其命名为ROT18。<br>ROT47：对数字、字母、常用符号进行编码，按照它们的ASCII值进行位置替换，用当前字符ASCII值往前数的第47位对应字符替换当前字符，用于ROT47编码的字符其ASCII值范围是33－126。<br>和凯撒一样本质上的都是位移密码.</p>
+<h4 id="5-栅栏密码"><a href="#5-栅栏密码" class="headerlink" title="5. 栅栏密码"></a>5. 栅栏密码</h4><p>通常这种题目会在题目描述的时候提示你是栅栏加密的。当提示我们是栅栏后，我们可以在在线的解密网站一个一个的尝试，然后其中有意义的一组就是我们的flag。</p>
+<blockquote>
+<p>密文：felhaagv{ewtehtehfilnakgw}<br>当每组字数为2时，解出：flag{wethinkwehavetheflag}</p>
+</blockquote>
+<h4 id="6-Jother编码"><a href="#6-Jother编码" class="headerlink" title="6.Jother编码"></a>6.Jother编码</h4><p>它是一种运用于Javascript语言中利用少量字符构造精简的匿名函数方法对于字符串进行的编码方式，其中少量字符包括”[“，”]”，”{“，”}”，”(“，”)”，”!”，”+”。举个例子:</p>
+<blockquote>
+<p>[][(![]+[])[!![]+!![]+!![]]+({}+[])[+!![]]+(!![]+[])[+!![]]+(!![]+[])[+[]]][({}+[])[!![]+!![]+!![]+!![]+!![]]+({}+[])[+!![]]+({}[[]]+[])[+!![]]+(![]+[])[!![]+!![]+!![]]+(!![]+[])[+[]]+(!![]+[])[+!![]]+({}[[]]+[])[+[]]+({}+[])[!![]+!![]+!![]+!![]+!![]]+(!![]+[])[+[]]+({}+[])[+!![]]+(!![]+[])[+!![]]]((!![]+[])[+!![]]+(!![]+[])[!![]+!![]+!![]]+(!![]+[])[+[]]+({}[[]]+[])[+[]]+(!![]+[])[+!![]]+({}[[]]+[])[+!![]]+({}+[])[!![]+!![]+!![]+!![]+!![]+!![]+!![]]+(![]+[])[!![]+!![]]+({}+[])[+!![]]+({}+[])[!![]+!![]+!![]+!![]+!![]]+(![]+[])[+!![]]+(!![]+[])[+[]]+({}[[]]+[])[!![]+!![]+!![]+!![]+!![]]+({}+[])[+!![]]+({}[[]]+[])[+!![]])()</p>
+</blockquote>
+<p>这种题目通常直接将内荣复制到浏览器的console中运行即可得到flag。</p>
+<h4 id="7-UUencode-XXencode"><a href="#7-UUencode-XXencode" class="headerlink" title="7.UUencode/XXencode"></a>7.UUencode/XXencode</h4><p>这两种编码和base64都比较相似。<br>特征：有很多的特殊字符+类似base64</p>
+<h4 id="8-MD5加密"><a href="#8-MD5加密" class="headerlink" title="8.MD5加密"></a>8.MD5加密</h4><p>这种题目也是，题目描述中会给出，然后直接在线网站破解就行。</p>
+<h4 id="9-URL编码"><a href="#9-URL编码" class="headerlink" title="9.URL编码"></a>9.URL编码</h4><p>URL编码后的格式是%xx，是该字符对应的ascii码的十六进制表示的前面加%。举个例子:</p>
+<blockquote>
+<p>%54%68%65%20%71%75%69%63%6b%20%62%72%6f%77%6e%20%66%6f%78%20%6a%75%6d%70%73%20%6f%76%65%72%20%74%68%65%20%6c%61%7a%79%20%64%6f%67</p>
+</blockquote>
+<h4 id="10-摩尔斯电码"><a href="#10-摩尔斯电码" class="headerlink" title="10.摩尔斯电码"></a>10.摩尔斯电码</h4><p>摩尔斯电码主要是由. - 组成，每一个字符之间通常用空格来表示，如</p>
+<blockquote>
+<p>.-.- … .- ..- -.- -. . –. -.– -. . – … .- — ..–.. –.- -.– -. ..- …— -…. .- —. -…. —– -…. .— -.– —.. .<br>. —.. —– —– —-. ..- —..</p>
+</blockquote>
+<p>有时候会被替换成01,需要先转换一下.</p>
+<h4 id="11-培根加密"><a href="#11-培根加密" class="headerlink" title="11.培根加密"></a>11.培根加密</h4><p>看到一串的A和B，并且五个一组，那么就是培根加密，直接在线解密。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>BC</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youngbc.cn/2020/03/01/CTF_crypto%E5%B8%B8%E8%A7%81%E5%8A%A0%E5%AF%86%E7%89%B9%E5%BE%81/">https://youngbc.cn/2020/03/01/CTF_crypto%E5%B8%B8%E8%A7%81%E5%8A%A0%E5%AF%86%E7%89%B9%E5%BE%81/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Crypto/"># Crypto</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/04/02/CTFHUB%E6%8A%80%E8%83%BD%E6%A0%91Web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">CTFHUB技能树Web-文件上传</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/21/Ubuntu%E8%83%BDping%E9%80%9A%E4%BD%86%E6%B5%8F%E8%A7%88%E5%99%A8%E6%97%A0%E6%B3%95%E4%B8%8A%E7%BD%91/">Ubuntu能ping通但浏览器无法上网</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© BC </span>
+    </div>
+	<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+	<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">陕ICP备20005804号</a> 
+    <div>
+	<img src="/image/youpaiyun.png" width="5%" /></a>
+	<a href="http://www.beian.miit.gov.cn/" target="_blank" ></a>
+    </div>
+
+
+
+    </div>
+</body>
+</html>
